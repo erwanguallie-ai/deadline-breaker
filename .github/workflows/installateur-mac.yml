@@ -1,0 +1,54 @@
+# Deadline Breaker - fabrication de l'installateur Mac (.dmg) sur un Mac de GitHub.
+# Lancement manuel : onglet « Actions » > « Installateur Mac » > « Run workflow ».
+# Résultat : « Deadline-Breaker-Mac » en bas de la page de l'exécution (le .dmg et la notice).
+name: Installateur Mac
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  dmg:
+    name: Fabrication du .dmg (Intel + Apple Silicon)
+    runs-on: macos-latest
+    timeout-minutes: 60
+    steps:
+      - name: Récupération du projet
+        uses: actions/checkout@v4
+
+      - name: Installation de Rust (cibles Intel et Apple Silicon)
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: aarch64-apple-darwin,x86_64-apple-darwin
+
+      - name: Cache de compilation (accélère les fabrications suivantes)
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri -> target
+
+      # Contrôle du moteur sur un vrai Mac ; un échec est signalé sans bloquer la fabrication.
+      - name: Tests du moteur sur Mac
+        working-directory: src-tauri
+        continue-on-error: true
+        run: cargo test
+
+      - name: Fabrication de l'application et du .dmg
+        working-directory: src-tauri
+        run: npx --yes @tauri-apps/cli@2 build --target universal-apple-darwin
+
+      - name: Rassemblement du .dmg et de la notice
+        run: |
+          mkdir -p Installateur_Mac
+          cp src-tauri/target/universal-apple-darwin/release/bundle/dmg/*.dmg Installateur_Mac/
+          cp outils/mac/Notice_installation_Mac.html Installateur_Mac/
+          ls -la Installateur_Mac
+
+      - name: Mise à disposition du .dmg
+        uses: actions/upload-artifact@v4
+        with:
+          name: Deadline-Breaker-Mac
+          path: Installateur_Mac/
+          retention-days: 30
+          if-no-files-found: error
