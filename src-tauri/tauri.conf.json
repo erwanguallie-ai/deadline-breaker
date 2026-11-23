@@ -1,0 +1,59 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Deadline Breaker",
+  "version": "2.2.0",
+  "identifier": "fr.avocat.lexprocedura",
+  "build": {
+    "frontendDist": "../ui"
+  },
+  "app": {
+    "withGlobalTauri": true,
+    "windows": [
+      {
+        "label": "main",
+        "title": "Deadline Breaker",
+        "width": 1366,
+        "height": 860,
+        "minWidth": 1100,
+        "minHeight": 680,
+        "resizable": true,
+        "center": true,
+        "dragDropEnabled": false
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": [
+      "nsis"
+    ],
+    "publisher": "Deadline Breaker",
+    "copyright": "Deadline Breaker",
+    "category": "Productivity",
+    "shortDescription": "French civil procedure deadlines, matters and alerts",
+    "longDescription": "Deadline Breaker: matter and deadline management under French civil procedure (arts. 640 to 644 CPC), calendar, e-mail alerts, Légifrance access and AI copilot. Data stays on this computer.",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.png",
+      "icons/icon.ico"
+    ],
+    "windows": {
+      "webviewInstallMode": {
+        "type": "downloadBootstrapper"
+      },
+      "nsis": {
+        "installMode": "currentUser",
+        "languages": [
+          "French"
+        ],
+        "displayLanguageSelector": false,
+        "installerIcon": "icons/icon.ico"
+      }
+    }
+  }
+}

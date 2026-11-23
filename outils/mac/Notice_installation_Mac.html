@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Installer Deadline Breaker sur Mac</title>
+<style>
+  :root { --fond: #f7f7f8; --carte: #ffffff; --texte: #1c1c1f; --texte-2: #55565c; --bord: #e2e2e6; --accent: #0369a1; --accent-fond: #e0f2fe; --alerte-fond: #fff7ed; --alerte-bord: #fdba74; --code: #f1f1f3; }
+  @media (prefers-color-scheme: dark) {
+    :root { --fond: #0b0b0c; --carte: #161618; --texte: #ededef; --texte-2: #a1a1a8; --bord: #2a2a2e; --accent: #38bdf8; --accent-fond: #0c2a3b; --alerte-fond: #2a1a0a; --alerte-bord: #9a5b1c; --code: #232326; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--fond); color: var(--texte); font: 15px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+  main { max-width: 760px; margin: 0 auto; padding: 32px 16px 48px; }
+  header { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 8px; }
+  h1 { font-size: 26px; margin: 0; letter-spacing: -0.01em; }
+  .langues a { color: var(--accent); text-decoration: none; font-weight: 600; margin-left: 12px; }
+  .chapeau { color: var(--texte-2); margin: 4px 0 24px; }
+  section.langue { margin-bottom: 48px; }
+  ol.etapes { list-style: none; padding: 0; margin: 0; counter-reset: e; }
+  ol.etapes > li { counter-increment: e; background: var(--carte); border: 1px solid var(--bord); border-radius: 12px; padding: 16px 18px 16px 60px; margin-bottom: 12px; position: relative; }
+  ol.etapes > li::before { content: counter(e); position: absolute; left: 18px; top: 16px; width: 28px; height: 28px; border-radius: 50%; background: var(--accent-fond); color: var(--accent); font-weight: 700; display: grid; place-items: center; }
+  h2 { font-size: 16px; margin: 2px 0 6px; }
+  h3 { font-size: 14px; margin: 12px 0 4px; }
+  p, ul { margin: 6px 0; }
+  ul { padding-left: 20px; }
+  .note { background: var(--alerte-fond); border: 1px solid var(--alerte-bord); border-radius: 10px; padding: 12px 14px; margin-top: 10px; }
+  code { background: var(--code); border-radius: 6px; padding: 2px 6px; font: 13px/1.4 ui-monospace, Menlo, monospace; word-break: break-all; }
+  pre { background: var(--code); border-radius: 8px; padding: 10px 12px; overflow-x: auto; font: 13px/1.5 ui-monospace, Menlo, monospace; white-space: pre-wrap; word-break: break-all; }
+  .bouton { display: inline-block; border: 1px solid var(--bord); background: var(--fond); border-radius: 6px; padding: 0 6px; font-weight: 600; }
+  footer { color: var(--texte-2); font-size: 13px; border-top: 1px solid var(--bord); padding-top: 16px; }
+</style>
+</head>
+<body>
+<main>
+
+<section class="langue" id="fr" lang="fr">
+  <header>
+    <h1>Installer Deadline Breaker sur Mac</h1>
+    <nav class="langues"><a href="#en">English</a></nav>
+  </header>
+  <p class="chapeau">macOS 10.15 (Catalina) ou plus récent, Mac Intel ou Apple Silicon (M1 à M4). Environ 2 minutes.</p>
+
+  <ol class="etapes">
+    <li>
+      <h2>Ouvrir l'image disque</h2>
+      <p>Double-cliquez sur le fichier <strong>Deadline Breaker_…_universal.dmg</strong>. Une fenêtre s'ouvre avec l'icône de l'application et le dossier Applications.</p>
+    </li>
+    <li>
+      <h2>Copier l'application</h2>
+      <p>Glissez l'icône <strong>Deadline Breaker</strong> sur le dossier <strong>Applications</strong>. Fermez la fenêtre, puis éjectez le disque « Deadline Breaker » (bouton ⏏ dans la barre latérale du Finder).</p>
+      <p>Lancez toujours l'application depuis le dossier Applications, jamais depuis l'image disque.</p>
+    </li>
+    <li>
+      <h2>Première ouverture : autoriser l'application (une seule fois)</h2>
+      <p>L'application n'est pas encore signée par Apple : macOS demande donc une confirmation à la première ouverture. C'est normal.</p>
+      <h3>macOS 15 Sequoia et plus récent</h3>
+      <ul>
+        <li>Dans Applications, double-cliquez sur Deadline Breaker. Au message « Apple n'a pas pu confirmer que… », cliquez sur <span class="bouton">Terminé</span> (et non sur « Placer dans la corbeille »).</li>
+        <li>Ouvrez <strong>Réglages Système › Confidentialité et sécurité</strong>, descendez jusqu'à la rubrique <strong>Sécurité</strong> : « Deadline Breaker a été bloqué… ». Cliquez sur <span class="bouton">Ouvrir quand même</span>, saisissez votre mot de passe, puis confirmez <span class="bouton">Ouvrir quand même</span>.</li>
+      </ul>
+      <h3>macOS 14 Sonoma et versions antérieures</h3>
+      <ul>
+        <li>Dans Applications, faites un clic droit (ou Contrôle + clic) sur Deadline Breaker, choisissez <span class="bouton">Ouvrir</span>, puis <span class="bouton">Ouvrir</span> dans la fenêtre de confirmation.</li>
+      </ul>
+      <p>Les ouvertures suivantes se font normalement (Launchpad, Dock, Spotlight).</p>
+    </li>
+    <li>
+      <h2>Autorisations demandées ensuite (normales)</h2>
+      <ul>
+        <li><strong>Dossier Documents</strong> : cliquez sur <span class="bouton">Autoriser</span>. Les exports et sauvegardes y sont rangés (dossier « Deadline Breaker »).</li>
+        <li><strong>Trousseau</strong> : à l'enregistrement d'une clé API, « Deadline Breaker souhaite utiliser… » : saisissez le mot de passe de votre session puis cliquez sur <span class="bouton">Toujours autoriser</span>. Les clés sont ainsi protégées par macOS et ne figurent jamais dans les fichiers de l'application.</li>
+        <li><strong>Lancement automatique</strong> (Paramètres › Alertes e-mail) : macOS affiche « Élément d'arrière-plan ajouté ». C'est le réglage que vous venez d'activer ; il se retire en décochant la case.</li>
+      </ul>
+    </li>
+  </ol>
+
+  <div class="note">
+    <strong>Message « Deadline Breaker est endommagé et ne peut pas être ouvert » ?</strong>
+    <p>Cela peut arriver lorsque le fichier a transité par certaines messageries. L'application n'est pas abîmée : ouvrez le Terminal (Applications › Utilitaires), collez la ligne ci-dessous, validez avec Entrée, puis relancez l'application.</p>
+    <pre>xattr -dr com.apple.quarantine "/Applications/Deadline Breaker.app"</pre>
+  </div>
+
+  <h3>Mise à jour</h3>
+  <p>Refaites les étapes 1 et 2 et choisissez <span class="bouton">Remplacer</span>. Dossiers, paramètres et clés sont conservés. macOS peut redemander une fois l'accès au Trousseau : <span class="bouton">Toujours autoriser</span>.</p>
+  <h3>Désinstallation</h3>
+  <p>Glissez Deadline Breaker d'Applications vers la Corbeille. Les données du cabinet restent sur le Mac dans <code>~/Library/Application Support/LexProcedura</code> (à supprimer seulement si vous voulez tout effacer, après une sauvegarde).</p>
+</section>
+
+<section class="langue" id="en" lang="en">
+  <header>
+    <h1>Installing Deadline Breaker on a Mac</h1>
+    <nav class="langues"><a href="#fr">Français</a></nav>
+  </header>
+  <p class="chapeau">macOS 10.15 (Catalina) or later, Intel or Apple silicon Mac (M1 to M4). About 2 minutes.</p>
+
+  <ol class="etapes">
+    <li>
+      <h2>Open the disk image</h2>
+      <p>Double-click <strong>Deadline Breaker_…_universal.dmg</strong>. A window shows the app icon and the Applications folder.</p>
+    </li>
+    <li>
+      <h2>Copy the app</h2>
+      <p>Drag <strong>Deadline Breaker</strong> onto <strong>Applications</strong>, close the window and eject the "Deadline Breaker" disk (⏏ in the Finder sidebar). Always start the app from Applications, never from the disk image.</p>
+    </li>
+    <li>
+      <h2>First launch: allow the app (once)</h2>
+      <p>The app is not yet signed by Apple, so macOS asks for confirmation the first time. This is expected.</p>
+      <h3>macOS 15 Sequoia and later</h3>
+      <ul>
+        <li>Double-click Deadline Breaker in Applications. When "Apple could not verify…" appears, click <span class="bouton">Done</span> (not "Move to Bin").</li>
+        <li>Open <strong>System Settings › Privacy &amp; Security</strong>, scroll to <strong>Security</strong>: "Deadline Breaker was blocked…". Click <span class="bouton">Open Anyway</span>, enter your password and confirm <span class="bouton">Open Anyway</span>.</li>
+      </ul>
+      <h3>macOS 14 Sonoma and earlier</h3>
+      <ul>
+        <li>In Applications, right-click (or Control-click) Deadline Breaker, choose <span class="bouton">Open</span>, then <span class="bouton">Open</span> again.</li>
+      </ul>
+    </li>
+    <li>
+      <h2>Permissions asked afterwards (expected)</h2>
+      <ul>
+        <li><strong>Documents folder</strong>: click <span class="bouton">Allow</span> (exports and backups go to "Deadline Breaker").</li>
+        <li><strong>Keychain</strong>: when an API key is saved, enter your login password and click <span class="bouton">Always Allow</span>. Keys are protected by macOS and never stored in the app's files.</li>
+        <li><strong>Launch at login</strong> (Settings › E-mail alerts): macOS shows "Background item added". Untick the box to remove it.</li>
+      </ul>
+    </li>
+  </ol>
+
+  <div class="note">
+    <strong>"Deadline Breaker is damaged and can't be opened"?</strong>
+    <p>This can happen when the file went through some messaging services. The app is fine: open Terminal (Applications › Utilities), paste the line below, press Return and start the app again.</p>
+    <pre>xattr -dr com.apple.quarantine "/Applications/Deadline Breaker.app"</pre>
+  </div>
+
+  <h3>Updating</h3>
+  <p>Repeat steps 1 and 2 and choose <span class="bouton">Replace</span>. Matters, settings and keys are kept.</p>
+  <h3>Uninstalling</h3>
+  <p>Drag Deadline Breaker from Applications to the Bin. Firm data stays in <code>~/Library/Application Support/LexProcedura</code>.</p>
+</section>
+
+<footer>Deadline Breaker — gestion des délais de procédure civile française. Les données restent sur ce Mac.</footer>
+</main>
+</body>
+</html>

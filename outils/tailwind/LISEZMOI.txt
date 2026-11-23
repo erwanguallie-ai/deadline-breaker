@@ -1,0 +1,6 @@
+Recompiler la feuille de style après modification des classes de index.html / renderer.js :
+
+  cd outils\tailwind
+  npx tailwindcss@3.4.17 -c tailwind.config.js -i input.css -o ..\..\ui\css\app.css --minify
+
+(Node.js requis uniquement pour cette étape de développement ; l'application n'en dépend pas.)

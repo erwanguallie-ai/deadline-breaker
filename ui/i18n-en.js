@@ -1,0 +1,823 @@
+/* Dictionnaire anglais de l'interface Deadline Breaker (généré par outils/i18n/gen_i18n.py).
+   Clé : texte français affiché ; {} : valeur variable. Le droit reste français. */
+window.I18N_EN = {
+"exact": {
+"Procédure civile française": "French civil procedure",
+"Nouvelle affaire": "New matter",
+"Nouvelle affaire (Ctrl+N)": "New matter (Ctrl+N)",
+"Rechercher": "Search",
+"Rechercher (Ctrl+F)": "Search (Ctrl+F)",
+"Nouvelle affaire (⌘N)": "New matter (⌘N)",
+"Rechercher (⌘F)": "Search (⌘F)",
+"Suivi": "Tracking",
+"Outils": "Tools",
+"Cabinet": "Firm",
+"Dossiers": "Matters",
+"Agenda": "Calendar",
+"Calcul des délais": "Deadline calculator",
+"Prescription & forclusion": "Limitation periods",
+"Pièces adverses": "Opposing documents",
+"Rédacteur d'actes": "Pleadings drafter",
+"Juridiction compétente": "Competent court",
+"Journal d'activité": "Activity log",
+"Paramètres": "Settings",
+"Changer de thème": "Change theme",
+"Thème clair": "Light theme",
+"Passer au thème clair": "Switch to light theme",
+"Passer au thème sombre": "Switch to dark theme",
+"Ouvrir le copilote IA": "Open the AI copilot",
+"Fermer le copilote IA": "Close the AI copilot",
+"Copilote IA": "AI copilot",
+"Copilote": "Copilot",
+"Échéances critiques": "Critical deadlines",
+"Échéances proches": "Upcoming deadlines",
+"Dossiers actifs": "Active matters",
+"Rechercher une partie, un n° RG, une juridiction...": "Search a party, a case number, a court...",
+"Tous": "All",
+"Urgents": "Urgent",
+"Proches": "Soon",
+"Dépassés": "Overdue",
+"Par urgence": "By urgency",
+"Par nom": "By name",
+"Derniers modifiés": "Recently modified",
+"Ordre d'affichage": "Sort order",
+"Archivés": "Archived",
+"Dossier": "Matter",
+"Étape": "Stage",
+"Prochaine échéance": "Next deadline",
+"Délai écoulé": "Time elapsed",
+"Diligences": "Tasks",
+"Bienvenue dans Deadline Breaker": "Welcome to Deadline Breaker",
+"Créez votre première affaire pour suivre ses échéances, ses diligences et sa chronologie.": "Create your first matter to track its deadlines, tasks and timeline.",
+"Créer ma première affaire": "Create my first matter",
+"Restaurer une sauvegarde": "Restore a backup",
+"Données stockées uniquement sur ce poste.": "Data stored on this computer only.",
+"Informations à compléter": "Details to complete",
+"Aucune échéance en cours": "No pending deadline",
+"Date fixée": "Fixed date",
+"archivé": "archived",
+"Échéance dépassée": "Deadline missed",
+"Sans échéance": "No deadline",
+"Aujourd'hui": "Today",
+"aucun enjeu chiffré": "no amount at stake",
+"Pré-contentieux": "Pre-litigation",
+"Introduction": "Commencement",
+"Mise en état": "Pre-trial",
+"Audience / délibéré": "Hearing / deliberation",
+"Recours / exécution": "Appeal / enforcement",
+"Ajouter une échéance": "Add a deadline",
+"Interroger le copilote IA sur ce dossier": "Ask the AI copilot about this matter",
+"Exporter la fiche du dossier (Word)": "Export the matter sheet (Word)",
+"Modifier le dossier": "Edit the matter",
+"Supprimer le dossier": "Delete the matter",
+"Synthèse": "Summary",
+"Échéances": "Deadlines",
+"Journal": "Log",
+"Étape de la procédure": "Procedural stage",
+"Informations": "Details",
+"Modifier": "Edit",
+"Notes": "Notes",
+"Enregistrer": "Save",
+"Stratégie, points d'attention, échanges avec le client...": "Strategy, points of attention, exchanges with the client...",
+"Détail du calcul": "Calculation details",
+"Détail": "Details",
+"Sanction": "Sanction",
+"Fondement": "Legal basis",
+"Passer le dossier à cette étape": "Move the matter to this stage",
+"Échéance fixée par la juridiction : pas de délai à consommer.": "Deadline set by the court: no time limit running.",
+"Aucune échéance en cours. Ajoutez un acte pour calculer le délai.": "No pending deadline. Add a step to compute the time limit.",
+"Client": "Client",
+"Partie adverse": "Opposing party",
+"Juridiction": "Court",
+"N° RG": "Case no.",
+"Référence": "Reference",
+"Enjeu": "Amount at stake",
+"Domicile de la partie": "Party's residence",
+"Jours fériés": "Public holidays",
+"Masqué pour l'IA": "Hidden from the AI",
+"Statut": "Status",
+"Actif": "Active",
+"Archivé": "Archived",
+"Non renseigné": "Not provided",
+"À préciser": "To be specified",
+"Métropole": "Metropolitan France",
+"Outre-mer (autre collectivité)": "Overseas (other territory)",
+"Outre-mer (même collectivité)": "Overseas (same territory)",
+"Étranger": "Abroad",
+"(par défaut)": "(default)",
+"Actes et échéances": "Steps and deadlines",
+"Recalculer": "Recalculate",
+"Exporter vers l'agenda": "Export to calendar",
+"Recalculer les échéances en cours avec le calendrier et la résidence actuels": "Recalculate pending deadlines with the current calendar and residence",
+"Aucun acte enregistré. Utilisez « Ajouter une échéance ».": "No step recorded. Use “Add a deadline”.",
+"Accompli": "Done",
+"Rouvrir": "Reopen",
+"Ajouter à l'agenda (.ics)": "Add to calendar (.ics)",
+"Envoyer une alerte e-mail": "Send an e-mail alert",
+"Supprimer": "Delete",
+"date fixée": "fixed date",
+"alerte envoyée": "alert sent",
+"Nouvelle diligence (ex : bordereau de pièces)": "New task (e.g. list of exhibits)",
+"Ajouter": "Add",
+"Appliquer le modèle": "Apply template",
+"Choisir un modèle de diligences...": "Choose a task template...",
+"Aucune diligence. Ajoutez vos points de contrôle ou appliquez un modèle.": "No task. Add your checkpoints or apply a template.",
+"Journal du dossier": "Matter log",
+"Exporter en PDF": "Export to PDF",
+"Aucune entrée pour ce dossier.": "No entries for this matter.",
+"Aucun dossier sélectionné.": "No matter selected.",
+"Revenir aux dossiers": "Back to matters",
+"Nom du dossier / Parties *": "Matter name / Parties *",
+"Ex: SAS ALPHA c/ M. DUPONT": "e.g. SAS ALPHA v. Mr DUPONT",
+"Référence cabinet": "Firm reference",
+"Ex: DOS-2026-X1": "e.g. FILE-2026-X1",
+"N° de RG": "Case number",
+"Ex: RG 26/04419": "e.g. RG 26/04419",
+"Ex: TJ de Nanterre": "e.g. Judicial Court of Nanterre",
+"Enjeu financier (€)": "Amount at stake (€)",
+"Partie représentée": "Represented party",
+"Résidence de la partie (art. 643 / 644)": "Party's residence (art. 643 / 644)",
+"Termes confidentiels à masquer pour l'IA (séparés par des virgules)": "Confidential terms to hide from the AI (comma-separated)",
+"Ex : nom du gérant, adresse du bien, nom d'un témoin": "e.g. manager's name, property address, witness name",
+"Siège de la juridiction (jours fériés, art. 644)": "Seat of the court (public holidays, art. 644)",
+"Calendrier par défaut (Paramètres)": "Default calendar (Settings)",
+"Annuler": "Cancel",
+"Créer le dossier": "Create matter",
+"Modifier l'affaire": "Edit matter",
+"Nature de l'acte / événement": "Type of step / event",
+"Ex: Notification des conclusions d'appelant": "e.g. Service of the appellant's submissions",
+"Délai procédural applicable": "Applicable time limit",
+"Date de l'acte / notification (origine du délai)": "Date of the step / notification (start of the time limit)",
+"Date de l'acte / notification (origine du délai) :": "Date of the step / notification (start of the time limit):",
+"Date de l'acte (facultative) :": "Date of the step (optional):",
+"Date de l'échéance fixée": "Fixed deadline date",
+"Années": "Years",
+"Mois": "Months",
+"Jours": "Days",
+"Fondement (ex : art. R. 121-21 CPCE)": "Legal basis (e.g. art. R. 121-21 CPCE)",
+"Sanction encourue": "Sanction incurred",
+"Appliquer l'augmentation de distance (art. 643 / 644)": "Apply the distance extension (art. 643 / 644)",
+"Enregistrer l'échéance": "Save deadline",
+"Confirmation": "Confirmation",
+"Confirmer": "Confirm",
+"Rechercher une affaire, un acte, un délai...": "Search a matter, a step, a time limit...",
+"France métropolitaine": "Metropolitan France",
+"Outre-mer, autre collectivité que la juridiction": "Overseas, territory other than the court's",
+"Outre-mer, même collectivité que la juridiction": "Overseas, same territory as the court",
+"Renseignez la nature de l'acte.": "Enter the type of step.",
+"Renseignez la date de l'acte.": "Enter the date of the step.",
+"Renseignez la date de l'échéance fixée.": "Enter the fixed deadline date.",
+"Le nom du dossier (parties) est obligatoire.": "The matter name (parties) is required.",
+"Sélectionnez d'abord un dossier.": "Select a matter first.",
+"À compter d'un acte": "From a step",
+"Avant une audience": "Before a hearing",
+"Date de l'acte ou de la notification": "Date of the step or notification",
+"Délai": "Time limit",
+"Durée": "Duration",
+"ans": "yrs",
+"mois": "months",
+"jours": "days",
+"La partie demeure": "The party lives",
+"en France métropolitaine": "in metropolitan France",
+"outre-mer, hors de la collectivité de la juridiction": "overseas, outside the court's territory",
+"outre-mer, dans la collectivité de la juridiction": "overseas, in the court's territory",
+"à l'étranger": "abroad",
+"Options": "Options",
+"Jours fériés du siège de la juridiction": "Public holidays at the court's seat",
+"Appliquer l'augmentation de distance (art. 643 et 644 CPC)": "Apply the distance extension (arts. 643 and 644 CPC)",
+"Indiquez la date de l'acte : l'échéance s'affiche ici.": "Enter the date of the step: the deadline appears here.",
+"Copier": "Copy",
+"Ajouter au dossier": "Add to matter",
+"Word": "Word",
+"Date de l'audience ou de la clôture": "Date of the hearing or closing order",
+"Procédure": "Procedure",
+"Tribunal judiciaire": "Judicial Court",
+"Cour d'appel": "Court of Appeal",
+"Référé": "Summary proceedings",
+"Indiquez la date de l'audience : le planning de préparation s'affiche ici.": "Enter the hearing date: the preparation schedule appears here.",
+"Marges internes de préparation, distinctes des délais légaux. Une date tombant un jour non ouvrable est avancée.": "Internal preparation margins, distinct from statutory time limits. A date falling on a non-working day is brought forward.",
+"Conclusions récapitulatives": "Final summary submissions",
+"Communication ultime des pièces et bordereau": "Final disclosure of exhibits and list",
+"Clôture prévisionnelle (à confirmer avec le calendrier du juge)": "Expected closing order (to be confirmed with the court's timetable)",
+"Dépôt du dossier de plaidoirie": "Filing of the pleadings bundle",
+"· date passée": "· date passed",
+"Calcul copié.": "Calculation copied.",
+"Ouvrez d'abord un dossier (rubrique Dossiers) pour y ajouter cette échéance.": "Open a matter first (Matters section) to add this deadline.",
+"Ouvrez d'abord un dossier (rubrique Dossiers) pour y ajouter cette date.": "Open a matter first (Matters section) to add this date.",
+"· prorogé au premier jour ouvrable (art. 642 CPC)": "· extended to the next working day (art. 642 CPC)",
+"Augmentation de distance non applicable à ce délai.": "Distance extension does not apply to this time limit.",
+"aujourd'hui": "today",
+"Échéance": "Deadline",
+"Recommencer": "Start over",
+"Quelle action ?": "Which action?",
+"Depuis quand le délai court-il ?": "When did the period start running?",
+"Interruptions et suspensions": "Interruptions and suspensions",
+"Ajouter un événement": "Add an event",
+"Demande en justice": "Legal action",
+"Interrompt le délai jusqu'à l'extinction de l'instance": "Interrupts the period until the proceedings end",
+"Référé-expertise": "Summary expert appointment",
+"Interruption, puis suspension jusqu'au rapport": "Interruption, then suspension until the report",
+"Médiation ou conciliation": "Mediation or conciliation",
+"Suspend le délai pendant la tentative": "Suspends the period during the attempt",
+"Options avancées": "Advanced options",
+"Nature du délai": "Type of period",
+"Prescription": "Limitation",
+"Forclusion": "Foreclosure",
+"Naissance du droit (délai butoir de 20 ans)": "Date the right arose (20-year long-stop)",
+"Situation appréciée au": "Assessed as at",
+"Choisissez l'action et son point de départ : le résultat s'affiche ici.": "Choose the action and its starting point: the result appears here.",
+"Raisonnement détaillé": "Detailed reasoning",
+"Délai écoulé avant le premier événement": "Time elapsed before the first event",
+"Période interrompue ou suspendue": "Interrupted or suspended period",
+"Délai restant": "Time remaining",
+"Interruption / suspension": "Interruption / suspension",
+"Assignation": "Writ",
+"Ordonnance": "Order",
+"Dépôt du rapport": "Report filed",
+"Date de la demande": "Date of the claim",
+"Fin de l'instance": "End of proceedings",
+"Début": "Start",
+"Fin": "End",
+"Retirer": "Remove",
+"Point de départ à saisir": "Starting point required",
+"Saisie à corriger": "Input to correct",
+"Délai interrompu ou suspendu, en cours": "Period interrupted or suspended, ongoing",
+"Point de reprise à venir": "Restart point pending",
+"Le nouveau délai court à compter de la fin de l'instance ou de la mesure. Renseignez sa date pour obtenir l'échéance.": "The new period runs from the end of the proceedings or measure. Enter that date to get the deadline.",
+"en suspens": "pending",
+"Raisonnement copié.": "Reasoning copied.",
+"Aucune date d'expiration calculable.": "No computable expiry date.",
+"Aucune date d'expiration calculable à rattacher.": "No computable expiry date to attach.",
+"Expiration du délai de prescription / forclusion": "Expiry of the limitation / foreclosure period",
+"Analyse de prescription / forclusion": "Limitation / foreclosure analysis",
+"Dispositif de conclusions en défense": "Operative part of defence submissions",
+"Irrégularités de l'acte adverse": "Defects in the opposing document",
+"Incompétence de la juridiction": "Lack of jurisdiction",
+"Exception de procédure ·": "Procedural objection ·",
+"Mention obligatoire omise": "Missing mandatory particular",
+"Nullité de forme, sur grief ·": "Formal nullity, prejudice required ·",
+"Défaut de capacité ou de pouvoir": "Lack of capacity or authority",
+"Nullité de fond, sans grief ·": "Substantive nullity, no prejudice required ·",
+"Prescription, forclusion ou défaut d'intérêt": "Limitation, foreclosure or lack of standing",
+"Fin de non-recevoir ·": "Plea of inadmissibility ·",
+"Conclusions au fond déjà notifiées": "Submissions on the merits already served",
+"Les exceptions de procédure sont alors irrecevables ·": "Procedural objections are then inadmissible ·",
+"Projet de dispositif": "Draft operative part",
+"Dispositif copié.": "Operative part copied.",
+"Projet de dispositif des conclusions": "Draft operative part of the submissions",
+"Reprendre le dossier ouvert": "Use the open matter",
+"Matière du litige": "Subject matter",
+"Montant de la demande": "Amount claimed",
+"Principal": "Principal",
+"Rattachement territorial": "Territorial connection",
+"Domicile du défendeur": "Defendant's residence",
+"Contrat : lieu de livraison ou d'exécution": "Contract: place of delivery or performance",
+"Délit : lieu du fait dommageable ou du dommage": "Tort: place of the harmful event or damage",
+"Immeuble : lieu de situation": "Real estate: location of the property",
+"Succession : lieu d'ouverture": "Succession: place where it opened",
+"Ville": "City",
+"Ex : Nanterre": "e.g. Nanterre",
+"Appliquer au dossier": "Apply to matter",
+"Compétence matérielle": "Subject-matter jurisdiction",
+"Compétence territoriale": "Territorial jurisdiction",
+"Représentation par avocat": "Representation by a lawyer",
+"Taux du ressort": "Appeal threshold",
+"Voie de recours": "Remedy",
+"Calculer ce délai à partir d'une notification →": "Calculate this time limit from a notification →",
+"Orientation copiée.": "Guidance copied.",
+"Appliquer la juridiction": "Apply the court",
+"Juridiction appliquée au dossier.": "Court applied to the matter.",
+"Orientation - compétence, représentation et recours": "Guidance - jurisdiction, representation and remedies",
+"Montant invalide.": "Invalid amount.",
+"Ouvrez d'abord un dossier depuis la rubrique Dossiers.": "Open a matter first from the Matters section.",
+"Cas test": "Test case",
+"Charger le cas pratique de démonstration (fonctionne sans connexion)": "Load the demo case (works offline)",
+"Déposez une assignation ou des conclusions": "Drop a writ of summons or submissions",
+"PDF ou fichier texte · ou cliquez pour choisir": "PDF or text file · or click to browse",
+"Retirer la pièce": "Remove the document",
+"Texte de la pièce": "Document text",
+"Le texte extrait du PDF s'affiche ici. Vous pouvez aussi le coller directement.": "The text extracted from the PDF appears here. You can also paste it directly.",
+"Dossier concerné": "Related matter",
+"Aucun dossier": "No matter",
+"Texte anonymisé sur ce poste avant envoi à l'IA": "Text anonymised on this computer before being sent to the AI",
+"Analyser": "Analyse",
+"Déposez une pièce adverse puis lancez l'analyse : dates, demandes, fondements et irrégularités de procédure s'affichent ici.": "Drop an opposing document and run the analysis: dates, claims, legal grounds and procedural defects appear here.",
+"Irrégularités et moyens de défense": "Procedural defects and defences",
+"Dates et délais": "Dates and time limits",
+"Demandes": "Claims",
+"Fondements invoqués": "Legal grounds relied on",
+"Analyse en cours...": "Analysing...",
+"Aucune irrégularité relevée.": "No defect found.",
+"Aucune date détectée.": "No date detected.",
+"Aucune demande chiffrée détectée.": "No quantified claim detected.",
+"Aucun fondement détecté.": "No legal ground detected.",
+"Analyse à contrôler sur l'acte original.": "Check the analysis against the original document.",
+"Synthèse non fournie.": "No summary provided.",
+"Créer une échéance dans le dossier à partir de cette date": "Create a deadline in the matter from this date",
+"Cas pratique de démonstration (fictif)": "Demo case (fictitious)",
+"Cas test chargé. Cliquez sur « Analyser ».": "Test case loaded. Click “Analyse”.",
+"Cas test : analyse préparée, sans connexion": "Test case: prepared analysis, offline",
+"Extraction du texte...": "Extracting text...",
+"Déposez une pièce ou collez son texte.": "Drop a document or paste its text.",
+"Analyse copiée.": "Analysis copied.",
+"Analyse de la pièce adverse": "Analysis of the opposing document",
+"Fichier illisible.": "Unreadable file.",
+"page(s)": "page(s)",
+"caractères extraits": "characters extracted",
+"Clé API": "API key",
+"non configurée (Paramètres).": "not configured (Settings).",
+"Format non pris en charge : déposez un PDF ou un fichier texte (.txt).": "Unsupported format: drop a PDF or a text file (.txt).",
+"Mois précédent": "Previous month",
+"Mois suivant": "Next month",
+"Liste": "List",
+"Affichage": "Display",
+"Échéances accomplies": "Completed deadlines",
+"Dossiers archivés": "Archived matters",
+"Exporter": "Export",
+"Lun.": "Mon.",
+"Mar.": "Tue.",
+"Mer.": "Wed.",
+"Jeu.": "Thu.",
+"Ven.": "Fri.",
+"Sam.": "Sat.",
+"Dim.": "Sun.",
+"Aucune échéance ce jour.": "No deadline on this day.",
+"Demain": "Tomorrow",
+"Hier": "Yesterday",
+"Accomplie": "Completed",
+"En retard": "Overdue",
+"7 prochains jours": "Next 7 days",
+"30 prochains jours": "Next 30 days",
+"Plus tard": "Later",
+"Accomplies": "Completed",
+"Toutes les échéances": "All deadlines",
+"Aucune échéance enregistrée. Ajoutez des actes depuis la fiche d'un dossier.": "No deadline recorded. Add steps from a matter's page.",
+"Aucune échéance à venir à exporter.": "No upcoming deadline to export.",
+"Toutes les catégories": "All categories",
+"Calculs": "Calculations",
+"Alertes": "Alerts",
+"Légifrance": "Légifrance",
+"Système": "System",
+"Texte": "Text",
+"Exporter en texte brut (.txt)": "Export as plain text (.txt)",
+"Aucune entrée.": "No entries.",
+"Calcul": "Calculation",
+"Diligence": "Task",
+"Alerte": "Alert",
+"Langue": "Language",
+"Langue de l'interface et des textes produits. Le droit applicable reste le droit français.": "Language of the interface and generated texts. French law still applies.",
+"Nom affiché sur les exports et seuils d'alerte des échéances.": "Name shown on exports, and deadline alert thresholds.",
+"Nom du cabinet": "Firm name",
+"Ex : Cabinet X & Associés": "e.g. X & Partners",
+"Échéance critique": "Critical deadline",
+"Échéance proche": "Upcoming deadline",
+"Siège retenu par défaut pour les calculs. Chaque dossier peut avoir le sien.": "Default court seat for calculations. Each matter can have its own.",
+"Siège par défaut des juridictions": "Default court seat",
+"Recalculer les échéances en cours": "Recalculate pending deadlines",
+"Textes de loi": "Statutes",
+"Lecture des articles en vigueur via OpenLegi (service tiers fondé sur Légifrance). Sans configuration, la base locale vérifiée est utilisée.": "Articles in force read via OpenLegi (third-party service based on Légifrance). Without configuration, the verified local database is used.",
+"Adresse du serveur OpenLegi": "OpenLegi server address",
+"Jeton d'accès": "Access token",
+"(si fourni séparément)": "(if provided separately)",
+"Laisser vide si le jeton figure dans l'adresse": "Leave empty if the token is part of the address",
+"Tester la connexion": "Test connection",
+"Fournisseur, clé et modèle. Les données du dossier sont anonymisées sur ce poste avant envoi.": "Provider, key and model. Matter data is anonymised on this computer before sending.",
+"Clé API Gemini": "Gemini API key",
+"Clé API Claude": "Claude API key",
+"Modèle": "Model",
+"Claude Opus 5.5 - le plus précis": "Claude Opus 5.5 - most accurate",
+"Claude Sonnet 5.5 - plus rapide, moins cher": "Claude Sonnet 5.5 - faster, cheaper",
+"Claude Haiku 5.5 - très rapide, économique": "Claude Haiku 5.5 - very fast, economical",
+"Anonymiser avant envoi (parties, n° RG, termes confidentiels, e-mails, téléphones, IBAN)": "Anonymise before sending (parties, case numbers, confidential terms, e-mails, phone numbers, IBANs)",
+"Alertes e-mail": "E-mail alerts",
+"Envoi par Resend. L'expéditeur doit appartenir à un domaine vérifié dans Resend. Un seul récapitulatif regroupe les échéances qui franchissent un seuil.": "Sent via Resend. The sender must belong to a domain verified in Resend. A single summary groups the deadlines that cross a threshold.",
+"Clé API Resend": "Resend API key",
+"Expéditeur": "Sender",
+"Destinataires": "Recipients",
+"Envoyer un e-mail de test": "Send a test e-mail",
+"Envoyer automatiquement un récapitulatif des échéances qui approchent": "Automatically send a summary of upcoming deadlines",
+"Prévenir": "Notify",
+"jours avant": "days before",
+"Vérifier maintenant": "Check now",
+"Lancer Deadline Breaker à l'ouverture de session Windows (fenêtre réduite), pour que les alertes partent même si l'application n'est pas ouverte": "Launch Deadline Breaker when Windows starts (minimised), so alerts are sent even if the app is not open",
+"Lancer Deadline Breaker à l'ouverture de session macOS (fenêtre réduite), pour que les alertes partent même si l'application n'est pas ouverte": "Launch Deadline Breaker when you log in to macOS (minimised), so alerts are sent even if the app is not open",
+"Sauvegarde": "Backup",
+"Données conservées sur ce poste. Une copie de secours est tenue à chaque écriture ; les clés API ne figurent jamais dans les sauvegardes.": "Data kept on this computer. A backup copy is kept on every write; API keys are never included in backups.",
+"Créer une sauvegarde": "Create a backup",
+"Lors d'une restauration, conserver mes paramètres et clés actuels": "When restoring, keep my current settings and keys",
+"Réinitialiser la base": "Reset the database",
+"Base": "Database",
+"Sauvegardes": "Backups",
+"Exports": "Exports",
+"Clés API": "API keys",
+"Gestionnaire d'identification Windows": "Windows Credential Manager",
+"fichier de données (coffre Windows indisponible)": "data file (Windows vault unavailable)",
+"Trousseau macOS": "macOS Keychain",
+"fichier de données (Trousseau macOS indisponible)": "data file (macOS Keychain unavailable)",
+"Test en cours...": "Testing...",
+"Envoi en cours...": "Sending...",
+"Vérification en cours...": "Checking...",
+"Saisissez une clé API.": "Enter an API key.",
+"Pensez à enregistrer.": "Remember to save.",
+"Paramètres enregistrés.": "Settings saved.",
+"Seuils invalides.": "Invalid thresholds.",
+"Réinitialiser": "Reset",
+"Confirmation finale": "Final confirmation",
+"Élargir le panneau": "Widen the panel",
+"Réduire le panneau": "Narrow the panel",
+"Effacer la discussion": "Clear the conversation",
+"Auditer les risques": "Audit the risks",
+"E-mail au client": "E-mail to client",
+"Trame de conclusions": "Submissions outline",
+"Posez une question procédurale ou demandez un projet d'acte...": "Ask a procedural question or request a draft document...",
+"Aucun dossier sélectionné": "No matter selected",
+"Anonymisé": "Anonymised",
+"Non anonymisé": "Not anonymised",
+"Non configuré": "Not configured",
+"Copilote de procédure civile": "Civil procedure copilot",
+"Général": "General",
+"Fiche dossier": "Matter page",
+"Une réponse est déjà en cours.": "A response is already in progress.",
+"Réponse copiée.": "Response copied.",
+"Réponse fournie par le modèle de secours": "Answer provided by the backup model",
+"Insérer la citation dans le Copilote IA": "Insert the quotation into the AI copilot",
+"Ouvrir sur Légifrance": "Open on Légifrance",
+"Actualiser": "Refresh",
+"Copier le texte officiel": "Copy the official text",
+"Version en vigueur": "Version in force",
+"Chargement du texte officiel...": "Loading the official text...",
+"Consultation de Légifrance en cours...": "Querying Légifrance...",
+"Base locale vérifiée": "Verified local database",
+"Légifrance - en direct": "Légifrance - live",
+"Légifrance - copie locale": "Légifrance - local copy",
+"Texte copié.": "Text copied.",
+"Article ouvert sur Légifrance dans votre navigateur.": "Article opened on Légifrance in your browser.",
+"Article non identifié précisément : le code complet s'ouvre sur Légifrance.": "Article not precisely identified: the whole code opens on Légifrance.",
+"Lire le texte et ouvrir sur Légifrance": "Read the text and open on Légifrance",
+"En vigueur": "In force",
+"Non disponible": "Not available",
+"Texte non disponible hors-ligne. Utilisez « Ouvrir sur Légifrance », ou configurez OpenLegi dans les Paramètres pour lire tous les articles ici.": "Text not available offline. Use “Open on Légifrance”, or configure OpenLegi in Settings to read every article here.",
+"Texte indisponible : la consultation a échoué (voir ci-dessous). Le bouton « Ouvrir sur Légifrance » reste disponible.": "Text unavailable: the lookup failed (see below). The “Open on Légifrance” button is still available.",
+"Lecture de l'art. 641 CPC via OpenLegi...": "Reading art. 641 CPC via OpenLegi...",
+"Base locale - texte vérifié sur Légifrance le 18/11/2026": "Local database - text checked on Légifrance on 18/11/2026",
+"Enregistré.": "Saved.",
+"Notes enregistrées.": "Notes saved.",
+"Modèle appliqué.": "Template applied.",
+"Alerte envoyée.": "Alert sent.",
+"Sauvegarde restaurée.": "Backup restored.",
+"Échéance enregistrée et journalisée.": "Deadline saved and logged.",
+"Récapitulatif des échéances envoyé par e-mail.": "Deadline summary sent by e-mail.",
+"Recalcul des échéances": "Deadline recalculation",
+"Supprimer l'échéance": "Delete the deadline",
+"Reprise des anciennes données": "Recover old data",
+"Anciennes données reprises dans la base du cabinet.": "Old data recovered into the firm database.",
+"Impossible de charger la base du cabinet": "Unable to load the firm database",
+"Lecture du fichier impossible.": "Unable to read the file.",
+"Aucun résultat.": "No results.",
+"Aucun dossier dans la base.": "No matter in the database.",
+"Aucun texte à insérer.": "No text to insert.",
+"Cette opération vide la base du cabinet. Confirmez-vous la réinitialisation ?": "This empties the firm database. Do you confirm the reset?",
+"Effacer tous les dossiers, paramètres et le journal de ce poste ?\n\nUne sauvegarde horodatée complète est créée au préalable dans le dossier Sauvegardes.": "Erase all matters, settings and the log on this computer?\n\nA full timestamped backup is created first in the Backups folder.",
+"Document généré par Deadline Breaker le": "Document generated by Deadline Breaker on",
+"Projet de travail à vérifier par l'avocat au regard des textes en vigueur et des circonstances du dossier.": "Working draft for the lawyer to check against the texts in force and the circumstances of the matter.",
+"Projet - copilote de procédure civile": "Draft - civil procedure copilot",
+"Computation de délai de procédure civile": "Civil procedure time-limit computation",
+"Rétro-planning d'audience": "Hearing back-planning",
+"Rétro-planning d'audience (indicatif)": "Hearing back-planning (indicative)",
+"Planning interne indicatif": "Indicative internal schedule",
+"Analyse de prescription rattachée au dossier": "Limitation analysis attached to the matter",
+"Interface en français.": "Interface en français.",
+"Interface in English.": "Interface in English.",
+"Aucun dossier ne correspond.": "No matter matches.",
+"Deadline Breaker <alertes@votre-domaine.fr>": "Deadline Breaker <alerts@your-firm.com>",
+"avocat@cabinet.fr, assistante@cabinet.fr": "lawyer@firm.com, assistant@firm.com",
+"Désistement, péremption ou rejet (": "Withdrawal, lapse or dismissal (",
+"Légifrance...": "Légifrance...",
+"et": "and",
+"à 24 h": "at midnight",
+"Code de procédure civile": "Code de procédure civile (Code of Civil Procedure)",
+"Code civil": "Code civil (Civil Code)",
+"Code de l'organisation judiciaire": "Code de l'organisation judiciaire (Code of Judicial Organisation)",
+"Code du travail": "Code du travail (Labour Code)",
+"Code des procédures civiles d'exécution": "Code des procédures civiles d'exécution (Code of Civil Enforcement Procedures)",
+"Code de la consommation": "Code de la consommation (Consumer Code)",
+"English": "English",
+"Français": "Français",
+"Gemini (Google)": "Gemini (Google)",
+"Claude (Anthropic)": "Claude (Anthropic)"
+},
+"gabarits": [
+[
+"{n} % du délai écoulé",
+"{}% of the time limit elapsed"
+],
+[
+"{n} échéance(s)",
+"{} deadline(s)"
+],
+[
+"{} (par défaut)",
+"{} (default)"
+],
+[
+"· délai butoir au {} (",
+"· long-stop on {} ("
+],
+[
+"En vigueur depuis le {} - lu via OpenLegi le {}",
+"In force since {} - read via OpenLegi on {}"
+],
+[
+"En vigueur depuis le {}",
+"In force since {}"
+],
+[
+"État : {} depuis le {}",
+"Status: {} since {}"
+],
+[
+"État : {}",
+"Status: {}"
+],
+[
+"{} - lu via OpenLegi le {}",
+"{} - read via OpenLegi on {}"
+],
+[
+"Tous {n}",
+"All {}"
+],
+[
+"Urgents {n}",
+"Urgent {}"
+],
+[
+"Proches {n}",
+"Soon {}"
+],
+[
+"Dépassés {n}",
+"Overdue {}"
+],
+[
+"Échéances {n}",
+"Deadlines {}"
+],
+[
+"Diligences {n}/{n}",
+"Tasks {}/{}"
+],
+[
+"Journal {n}",
+"Log {}"
+],
+[
+"dans les {n} jour{}",
+"within {} day{}"
+],
+[
+"{} d'enjeux",
+"{} at stake"
+],
+[
+"{n} urgent(s)",
+"{} urgent"
+],
+[
+"dans {n} jour{}",
+"in {} day{}"
+],
+[
+"expiré depuis {n} jour{}",
+"expired {} day{} ago"
+],
+[
+"Dépassée de {n} j",
+"Overdue by {} d"
+],
+[
+"Dépassée depuis {n} jour{}",
+"Overdue for {} day{}"
+],
+[
+"J-{n}",
+"D-{}"
+],
+[
+"Dans {n} jours",
+"In {} days"
+],
+[
+"Il y a {n} jours",
+"{} days ago"
+],
+[
+"Étape {n} sur 5",
+"Stage {} of 5"
+],
+[
+"{n}/5 · {}",
+"{}/5 · {}"
+],
+[
+"{} % du délai écoulé ({} jours au total)",
+"{}% of the time limit elapsed ({} days in total)"
+],
+[
+"reste {n} j",
+"{} d left"
+],
+[
+"dépassé de {n} j",
+"overdue by {} d"
+],
+[
+"depuis le {}",
+"since {}"
+],
+[
+"alerte {} envoyée",
+"{} alert sent"
+],
+[
+"{} échéances dépassées non traitées : voir l'onglet Échéances.",
+"{} missed deadlines not dealt with: see the Deadlines tab."
+],
+[
+"{} · {} dépassées",
+"{} · {} missed"
+],
+[
+"Aucun dossier ne correspond{}.",
+"No matter matches{}."
+],
+[
+"(les dossiers archivés sont masqués)",
+"(archived matters are hidden)"
+],
+[
+"à 24 h{}",
+"at midnight{}"
+],
+[
+"Délai libre de {}",
+"Custom time limit of {}"
+],
+[
+"Non acquise au {}",
+"Not time-barred as at {}"
+],
+[
+"Acquise au {}",
+"Time-barred as at {}"
+],
+[
+"Prescrit le {}",
+"Time-barred on {}"
+],
+[
+"Prescrit depuis le {}",
+"Time-barred since {}"
+],
+[
+"Forclos le {}",
+"Foreclosed on {}"
+],
+[
+"Forclos depuis le {}",
+"Foreclosed since {}"
+],
+[
+"Dernier jour pour agir : {} · reste {}",
+"Last day to act: {} · {} left"
+],
+[
+"Dernier jour pour agir : {}",
+"Last day to act: {}"
+],
+[
+"Fondement : {} · délai butoir au {} ({})",
+"Legal basis: {} · long-stop on {} ({})"
+],
+[
+"Fondement : {}",
+"Legal basis: {}"
+],
+[
+"Désistement, péremption ou rejet ({})",
+"Withdrawal, lapse or dismissal ({})"
+],
+[
+"Date limite du {} ajoutée au dossier {}.",
+"Deadline of {} added to matter {}."
+],
+[
+"{} {} ({} et {})",
+"{} {} ({} and {})"
+],
+[
+"Délai sélectionné : {}. Saisissez la date de notification.",
+"Time limit selected: {}. Enter the notification date."
+],
+[
+"Montant repris du dossier « {} ».",
+"Amount taken from matter “{}”."
+],
+[
+"Remplacer la juridiction du dossier « {} » par :\n{} ?",
+"Replace the court of matter “{}” with:\n{}?"
+],
+[
+"Supprimer « {} » (échéance du {}) ?\nL'opération est tracée dans le journal d'activité.",
+"Delete “{}” (deadline of {})?\nThe operation is recorded in the activity log."
+],
+[
+"Supprimer définitivement « {} » et ses {} échéance(s) ?\n\nUne sauvegarde horodatée de la base est créée automatiquement avant la suppression.",
+"Permanently delete “{}” and its {} deadline(s)?\n\nA timestamped backup of the database is created automatically before deletion."
+],
+[
+"Avec le calendrier et la résidence actuels, {} échéance(s) en cours changeraient :\n\n{}\n\nAppliquer ces nouvelles dates ? L'opération est tracée dans le journal d'audit.",
+"With the current calendar and residence, {} pending deadline(s) would change:\n\n{}\n\nApply these new dates? The operation is recorded in the activity log."
+],
+[
+"Échéances à jour : aucune modification nécessaire{}",
+"Deadlines up to date: no change needed{}"
+],
+[
+"{} échéance(s) recalculée(s).",
+"{} deadline(s) recalculated."
+],
+[
+"Fichier enregistré : {}",
+"File saved: {}"
+],
+[
+"Journal exporté : {}",
+"Log exported: {}"
+],
+[
+"Journal exporté en PDF : {}",
+"Log exported to PDF: {}"
+],
+[
+"Journal du dossier exporté en PDF : {}",
+"Matter log exported to PDF: {}"
+],
+[
+"Sauvegarde créée : {}",
+"Backup created: {}"
+],
+[
+"OpenLegi indisponible : {}",
+"OpenLegi unavailable: {}"
+],
+[
+"**Erreur :** {}",
+"**Error:** {}"
+],
+[
+"**Clé API {} non configurée.** Renseignez-la dans l'onglet **Paramètres**.",
+"**{} API key not configured.** Enter it in the **Settings** tab."
+],
+[
+"Renseignez votre clé API {} dans Paramètres pour activer le copilote.",
+"Enter your {} API key in Settings to activate the copilot."
+],
+[
+"{} entrée(s) plus ancienne(s) : utilisez l'export.",
+"{} older entr(y/ies): use the export."
+],
+[
+"{} ({n} points)",
+"{} ({} items)"
+],
+[
+"Audience - {}",
+"Hearing - {}"
+],
+[
+"Calendrier : {}{}",
+"Calendar: {}{}"
+],
+[
+"Échéance calculée : {} à 24 h",
+"Computed deadline: {} at midnight"
+],
+[
+"Échéance fixée par la juridiction : saisissez la date. Aucun calcul n'est appliqué. {}",
+"Deadline set by the court: enter the date. No computation is applied. {}"
+],
+[
+"Expiration du délai de {} (simulateur)",
+"Expiry of the {} period (simulator)"
+],
+[
+"· avancé de {} j ({} non ouvrable)",
+"· brought forward {} d ({} non-working)"
+],
+[
+"{} · avancé de {} j ({} non ouvrable)",
+"{} · brought forward {} d ({} non-working)"
+]
+]
+};

@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-slate-50">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deadline Breaker</title>
+    <!-- Ressources embarquées : aucune dépendance réseau (CSS compilée par outils/tailwind) -->
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/theme-sombre.css">
+    <script>(function () { var t = null, l = null; try { t = localStorage.getItem('lexprocedura_theme'); l = localStorage.getItem('lexprocedura_langue'); } catch (e) {} if (t === 'sombre') document.documentElement.classList.add('theme-sombre'); if (l === 'fr') document.documentElement.lang = 'fr'; })();</script>
+    <script src="vendor/icones.js"></script>
+</head>
+<body class="h-full flex font-sans antialiased text-slate-800 select-none overflow-hidden bg-slate-50 relative">
+
+    <!-- MENU LATÉRAL : barre d'icônes, dépliée au survol par-dessus le contenu -->
+    <aside id="menu-lateral" class="menu-rail fixed left-0 top-0 h-full z-40 flex flex-col bg-slate-950 text-slate-300 border-r border-slate-800/80 overflow-hidden">
+        <div class="h-14 shrink-0 flex items-center gap-3 px-4 border-b border-slate-800/80">
+            <div class="w-8 h-8 shrink-0 -ml-1 rounded-lg bg-sky-600 flex items-center justify-center text-white"><i data-lucide="scale" class="w-4 h-4"></i></div>
+            <div class="menu-libelle">
+                <p class="font-bold text-xs tracking-tight text-white leading-none">Deadline Breaker</p>
+                <p class="text-[9px] text-sky-400 font-semibold uppercase tracking-wider mt-0.5">Procédure civile française</p>
+            </div>
+        </div>
+        <div class="p-2 space-y-1 shrink-0">
+            <button id="btn-rail-nouvelle-affaire" title="Nouvelle affaire (Ctrl+N)" class="w-full flex items-center gap-3 px-4 py-2.5 rounded-lg bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold transition">
+                <i data-lucide="plus" class="w-4 h-4 shrink-0"></i>
+                <span class="menu-libelle flex-1 text-left">Nouvelle affaire</span>
+                <kbd class="menu-libelle text-[9px] font-mono bg-sky-700 px-1 rounded">Ctrl N</kbd>
+            </button>
+            <button id="btn-quick-search-trigger" title="Rechercher (Ctrl+F)" class="w-full flex items-center gap-3 px-4 py-2 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white text-xs transition">
+                <i data-lucide="search" class="w-4 h-4 shrink-0"></i>
+                <span class="menu-libelle flex-1 text-left">Rechercher</span>
+                <kbd class="menu-libelle text-[9px] font-mono bg-slate-800 px-1 rounded border border-slate-700">Ctrl F</kbd>
+            </button>
+        </div>
+        <nav class="flex-1 px-2 space-y-0.5 overflow-y-auto overflow-x-hidden text-xs font-semibold">
+            <p class="menu-groupe">Suivi</p>
+            <button class="nav-item w-full flex items-center gap-3 px-4 py-2 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition" data-view="view-dashboard" title="Dossiers">
+                <span class="relative shrink-0"><i data-lucide="folder-kanban" class="w-4 h-4 text-sky-400"></i><span id="badge-critiques" class="badge-rail hidden"></span></span>
+                <span class="menu-libelle flex-1 text-left">Dossiers</span>
+                <span id="badge-critiques-libelle" class="menu-libelle badge-rail-libelle hidden"></span>
+            </button>
+            <button class="nav-item w-full flex items-center gap-3 px-4 py-2 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition" data-view="view-agenda" title="Agenda">
+                <i data-lucide="calendar-days" class="w-4 h-4 text-sky-300 shrink-0"></i>
+                <span class="menu-libelle">Agenda</span>
+            </button>
+            <p class="menu-groupe">Outils</p>
+            <button class="nav-item w-full flex items-center gap-3 px-4 py-2 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition" data-view="view-cpc-express" title="Calcul des délais">
+                <i data-lucide="calculator" class="w-4 h-4 text-amber-400 shrink-0"></i>
+                <span class="menu-libelle">Calcul des délais</span>
+            </button>
+            <button class="nav-item w-full flex items-center gap-3 px-4 py-2 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition" data-view="view-prescription" title="Prescription & forclusion">
+                <i data-lucide="hourglass" class="w-4 h-4 text-purple-400 shrink-0"></i>
+                <span class="menu-libelle">Prescription & forclusion</span>
+            </button>
+            <button class="nav-item w-full flex items-center gap-3 px-4 py-2 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition" data-view="view-analyse" title="Pièces adverses">
+                <i data-lucide="file-search" class="w-4 h-4 text-orange-400 shrink-0"></i>
+                <span class="menu-libelle">Pièces adverses</span>
+            </button>
+            <button class="nav-item w-full flex items-center gap-3 px-4 py-2 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition" data-view="view-incidents" title="Rédacteur d'actes">
+                <i data-lucide="pen-line" class="w-4 h-4 text-rose-400 shrink-0"></i>
+                <span class="menu-libelle">Rédacteur d'actes</span>
+            </button>
+            <button class="nav-item w-full flex items-center gap-3 px-4 py-2 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition" data-view="view-competence" title="Juridiction compétente">
+                <i data-lucide="compass" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+                <span class="menu-libelle">Juridiction compétente</span>
+            </button>
+        </nav>
+        <div class="p-2 border-t border-slate-800/80 space-y-0.5 text-xs font-medium shrink-0">
+            <p class="menu-groupe">Cabinet</p>
+            <button class="nav-item w-full flex items-center gap-3 px-4 py-2 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition" data-view="view-journal" title="Journal d'activité">
+                <i data-lucide="scroll-text" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                <span class="menu-libelle">Journal d'activité</span>
+            </button>
+            <button class="nav-item w-full flex items-center gap-3 px-4 py-2 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition" data-view="view-params" title="Paramètres">
+                <i data-lucide="settings" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                <span class="menu-libelle">Paramètres</span>
+            </button>
+            <button id="btn-theme" class="w-full flex items-center gap-3 px-4 py-2 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white transition" title="Changer de thème">
+                <i id="btn-theme-icone" data-lucide="sun" class="w-4 h-4 shrink-0"></i>
+                <span id="btn-theme-libelle" class="menu-libelle">Thème clair</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- ZONE PRINCIPALE -->
+    <main class="flex-1 flex flex-col overflow-hidden bg-slate-50 relative ml-16">
+
+        <!-- =============================================================== -->
+        <!-- 1. VUE DASHBOARD : MAÎTRE / DÉTAIL (60% / 40%)                  -->
+        <!-- =============================================================== -->
+        <div id="view-dashboard" class="content-view active flex-1 overflow-y-auto">
+            <div class="page page-large">
+                <header class="page-entete">
+                    <h1 class="titre-page">Dossiers</h1>
+                    <button id="btn-open-modal-new-case" type="button" class="btn btn-primaire"><i data-lucide="plus" class="w-4 h-4"></i> Nouvelle affaire</button>
+                </header>
+
+                <div id="dossiers-outils">
+                    <div class="grid grid-cols-3 gap-4 mb-6">
+                        <button id="kpi-card-urgent" type="button" class="carte tuile">
+                            <span class="tuile-libelle"><span class="point point-rouge"></span> Échéances critiques</span>
+                            <span id="kpi-critique-count" class="tuile-valeur">0</span>
+                            <span id="kpi-lbl-rouge" class="tuile-note">dans les 3 jours</span>
+                        </button>
+                        <button id="kpi-card-week" type="button" class="carte tuile">
+                            <span class="tuile-libelle"><span class="point point-orange"></span> Échéances proches</span>
+                            <span id="kpi-week-count" class="tuile-valeur">0</span>
+                            <span id="kpi-lbl-orange" class="tuile-note">dans les 7 jours</span>
+                        </button>
+                        <button id="kpi-card-active" type="button" class="carte tuile">
+                            <span class="tuile-libelle"><span class="point point-bleu"></span> Dossiers actifs</span>
+                            <span id="kpi-active-count" class="tuile-valeur">0</span>
+                            <span id="kpi-total-financial" class="tuile-note">0 €</span>
+                        </button>
+                    </div>
+
+                    <div class="flex flex-wrap items-center gap-3 mb-3">
+                        <label class="champ-recherche">
+                            <i data-lucide="search" class="w-4 h-4"></i>
+                            <input id="filter-search-input" type="text" placeholder="Rechercher une partie, un n° RG, une juridiction..." class="champ">
+                        </label>
+                        <div class="segments">
+                            <button type="button" class="segment filter-pill actif active" data-filter="ALL">Tous <span id="pill-cnt-all" class="compteur">0</span></button>
+                            <button type="button" class="segment filter-pill" data-filter="URGENT">Urgents <span id="pill-cnt-urg" class="compteur">0</span></button>
+                            <button type="button" class="segment filter-pill" data-filter="WEEK">Proches <span id="pill-cnt-week" class="compteur">0</span></button>
+                            <button type="button" class="segment filter-pill" data-filter="EXPIRED">Dépassés <span id="pill-cnt-exp" class="compteur">0</span></button>
+                        </div>
+                        <span class="flex-1"></span>
+                        <select id="liste-tri" class="champ champ-compact" title="Ordre d'affichage">
+                            <option value="URGENCE">Par urgence</option>
+                            <option value="NOM">Par nom</option>
+                            <option value="RECENT">Derniers modifiés</option>
+                        </select>
+                        <label class="case-a-cocher"><input id="liste-archives" type="checkbox"> <span>Archivés</span></label>
+                    </div>
+                </div>
+
+                <div class="carte overflow-hidden">
+                    <div id="liste-entete" class="hidden liste-dossiers entete">
+                        <span>Dossier</span><span>Étape</span><span>Prochaine échéance</span><span>Délai écoulé</span><span class="text-right">Diligences</span>
+                    </div>
+                    <div id="cases-cards-container"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- =============================================================== -->
+        <!-- 1 bis. FICHE DOSSIER (plein écran, à onglets)                   -->
+        <!-- =============================================================== -->
+        <div id="view-dossier" class="content-view hidden flex-1 flex flex-col overflow-hidden">
+            <div id="cp-empty-state" class="flex-1 hidden flex-col items-center justify-center etat-vide">
+                <i data-lucide="folder-open" class="w-8 h-8"></i>
+                <p>Aucun dossier sélectionné.</p>
+                <button id="btn-retour-liste-vide" type="button" class="btn btn-secondaire">Revenir aux dossiers</button>
+            </div>
+            <div id="cp-detail-body" class="flex-1 flex flex-col overflow-hidden">
+                <div class="entete-dossier">
+                    <div class="entete-dossier-contenu">
+                        <button id="btn-retour-liste" type="button" class="lien-retour"><i data-lucide="arrow-left" class="w-4 h-4"></i> Dossiers</button>
+                        <div class="flex items-start justify-between gap-4 mt-2">
+                            <div class="min-w-0">
+                                <div class="flex items-center gap-3 flex-wrap">
+                                    <h1 id="cp-dossier-titre" translate="no" class="titre-page"></h1>
+                                    <span id="cp-badge-urgence"></span>
+                                </div>
+                                <div id="cp-dossier-meta" class="meta-dossier"></div>
+                            </div>
+                            <div class="flex items-center gap-2 shrink-0">
+                                <button id="btn-open-modal-add-act" type="button" class="btn btn-primaire"><i data-lucide="calendar-plus" class="w-4 h-4"></i> Ajouter une échéance</button>
+                                <button id="btn-copilote-dossier" type="button" class="btn btn-secondaire" title="Interroger le copilote IA sur ce dossier"><i data-lucide="sparkles" class="w-4 h-4 text-indigo-500"></i> Copilote</button>
+                                <button id="btn-export-fiche" type="button" class="btn-icone" title="Exporter la fiche du dossier (Word)"><i data-lucide="file-down" class="w-4 h-4"></i></button>
+                                <button id="btn-edit-active-case" type="button" class="btn-icone" title="Modifier le dossier"><i data-lucide="pencil" class="w-4 h-4"></i></button>
+                                <button id="btn-delete-active-case" type="button" class="btn-icone btn-icone-danger" title="Supprimer le dossier"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                            </div>
+                        </div>
+                        <nav id="dossier-onglets" class="onglets">
+                            <button type="button" data-onglet="synthese" class="onglet">Synthèse</button>
+                            <button type="button" data-onglet="echeances" class="onglet">Échéances <span id="onglet-cnt-echeances" class="compteur">0</span></button>
+                            <button type="button" data-onglet="diligences" class="onglet">Diligences <span id="onglet-cnt-diligences" class="compteur">0/0</span></button>
+                            <button type="button" data-onglet="journal" class="onglet">Journal <span id="onglet-cnt-journal" class="compteur">0</span></button>
+                        </nav>
+                    </div>
+                </div>
+
+                <div class="flex-1 overflow-y-auto">
+                    <div class="page page-large" style="padding-top:1.75rem">
+                        <!-- SYNTHÈSE -->
+                        <div data-panneau="synthese" class="grille-synthese">
+                            <div class="space-y-6 min-w-0">
+                                <section class="carte p-6">
+                                    <div class="flex items-center justify-between gap-3">
+                                        <h2 class="titre-section">Prochaine échéance</h2>
+                                        <span id="cp-article-trigger-badge"></span>
+                                    </div>
+                                    <div id="cp-prochaine" class="mt-3"></div>
+                                    <div id="cp-jauge" class="mt-5"></div>
+                                    <details id="cp-detail-calcul" class="options-avancees mt-5">
+                                        <summary>Détail du calcul</summary>
+                                        <p id="cp-vigilance-texte" class="etapes-calcul" style="list-style:none;padding-left:0"></p>
+                                    </details>
+                                </section>
+                                <section class="carte p-6">
+                                    <div class="flex items-center justify-between gap-3 mb-3">
+                                        <h2 class="titre-section">Notes</h2>
+                                        <button id="btn-save-notes" type="button" class="btn btn-secondaire">Enregistrer</button>
+                                    </div>
+                                    <textarea id="dossier-notes" rows="6" placeholder="Stratégie, points d'attention, échanges avec le client..." class="champ"></textarea>
+                                </section>
+                            </div>
+                            <div class="space-y-6 min-w-0">
+                                <section class="carte p-6">
+                                    <div class="flex items-center justify-between gap-3 mb-4">
+                                        <h2 class="titre-section">Étape de la procédure</h2>
+                                        <span id="cp-etape-label" class="text-xs texte-3"></span>
+                                    </div>
+                                    <div id="cp-etapes" class="etapes"></div>
+                                </section>
+                                <section class="carte p-6">
+                                    <div class="flex items-center justify-between gap-3 mb-2">
+                                        <h2 class="titre-section">Informations</h2>
+                                        <button id="btn-infos-modifier" type="button" class="btn btn-fantome" style="height:2rem;padding:0 .5rem">Modifier</button>
+                                    </div>
+                                    <dl id="dossier-infos" class="infos-dossier"></dl>
+                                </section>
+                            </div>
+                        </div>
+
+                        <!-- ÉCHÉANCES -->
+                        <section data-panneau="echeances" class="hidden carte">
+                            <div class="flex items-center justify-between gap-3 px-6 py-4" style="border-bottom:1px solid var(--bord)">
+                                <h2 class="titre-section">Actes et échéances</h2>
+                                <div class="flex items-center gap-2">
+                                    <button id="btn-recalc-dossier" type="button" class="btn btn-fantome" title="Recalculer les échéances en cours avec le calendrier et la résidence actuels"><i data-lucide="refresh-cw" class="w-4 h-4"></i> Recalculer</button>
+                                    <button id="btn-ics-dossier" type="button" class="btn btn-secondaire"><i data-lucide="calendar-plus" class="w-4 h-4"></i> Exporter vers l'agenda</button>
+                                </div>
+                            </div>
+                            <div id="cp-timeline-items"></div>
+                        </section>
+
+                        <!-- DILIGENCES -->
+                        <section data-panneau="diligences" class="hidden carte p-6" style="max-width:48rem">
+                            <div class="flex items-center justify-between gap-3">
+                                <h2 class="titre-section">Diligences</h2>
+                                <span id="cp-checklist-percent" class="text-sm font-medium texte-2">0%</span>
+                            </div>
+                            <div class="frise-barre mt-3 mb-4"><div id="cp-checklist-progressbar" class="bg-emerald-500" style="width:0%"></div></div>
+                            <div id="cp-checklist-items"></div>
+                            <form id="form-add-diligence" class="flex gap-2 mt-4">
+                                <input id="input-new-diligence" type="text" placeholder="Nouvelle diligence (ex : bordereau de pièces)" class="champ flex-1 min-w-0">
+                                <button type="submit" class="btn btn-secondaire">Ajouter</button>
+                            </form>
+                            <div class="flex gap-2 mt-3 pt-4" style="border-top:1px solid var(--bord)">
+                                <select id="select-modele-diligences" class="champ flex-1 min-w-0 w-0"></select>
+                                <button id="btn-appliquer-modele" type="button" class="btn btn-secondaire">Appliquer le modèle</button>
+                            </div>
+                        </section>
+
+                        <!-- JOURNAL DU DOSSIER -->
+                        <section data-panneau="journal" class="hidden carte overflow-hidden">
+                            <div class="flex items-center justify-between gap-3 px-6 py-3" style="border-bottom:1px solid var(--bord)">
+                                <h2 class="titre-section">Journal du dossier</h2>
+                                <button id="btn-journal-dossier-pdf" type="button" class="btn btn-secondaire"><i data-lucide="file-text" class="w-4 h-4"></i> Exporter en PDF</button>
+                            </div>
+                            <div id="dossier-journal"></div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- =============================================================== -->
+        <!-- 2. CALCULATEUR EXPRESS CPC : DIRECT + RÉTRO-PLANNING            -->
+        <!-- =============================================================== -->
+        <div id="view-cpc-express" class="content-view hidden flex-1 overflow-y-auto">
+            <div class="page">
+                <header class="page-entete">
+                    <h1 class="titre-page">Calcul des délais</h1>
+                    <div class="segments" role="tablist">
+                        <button id="btn-mode-cpc-direct" type="button" class="segment actif">À compter d'un acte</button>
+                        <button id="btn-mode-cpc-retro" type="button" class="segment">Avant une audience</button>
+                    </div>
+                </header>
+
+                <!-- MODE DIRECT : saisie à gauche, échéance à droite (mise à jour instantanée) -->
+                <section id="section-cpc-direct" class="grille-outil">
+                    <div class="carte p-6 space-y-5">
+                        <div>
+                            <label class="champ-titre" for="exp-date-input">Date de l'acte ou de la notification</label>
+                            <input id="exp-date-input" type="date" class="champ">
+                        </div>
+                        <div>
+                            <label class="champ-titre" for="exp-delai-select">Délai</label>
+                            <select id="exp-delai-select" class="champ"></select>
+                        </div>
+                        <div id="exp-libre-wrap" class="hidden">
+                            <span class="champ-titre">Durée</span>
+                            <div class="grid grid-cols-3 gap-2">
+                                <label class="champ-unite"><input id="exp-libre-annees" type="number" min="0" value="0" class="champ"><span>ans</span></label>
+                                <label class="champ-unite"><input id="exp-libre-mois" type="number" min="0" value="0" class="champ"><span>mois</span></label>
+                                <label class="champ-unite"><input id="exp-libre-jours" type="number" min="0" value="0" class="champ"><span>jours</span></label>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="champ-titre" for="exp-distance-select">La partie demeure</label>
+                            <select id="exp-distance-select" class="champ">
+                                <option value="FRANCE_METROPOLE">en France métropolitaine</option>
+                                <option value="DOM_TOM">outre-mer, hors de la collectivité de la juridiction</option>
+                                <option value="DOM_TOM_LOCAL">outre-mer, dans la collectivité de la juridiction</option>
+                                <option value="ETRANGER">à l'étranger</option>
+                            </select>
+                        </div>
+                        <details class="options-avancees">
+                            <summary>Options</summary>
+                            <div class="space-y-4 pt-3">
+                                <div>
+                                    <label class="champ-titre" for="exp-calendrier-select">Jours fériés du siège de la juridiction</label>
+                                    <select id="exp-calendrier-select" class="champ"></select>
+                                </div>
+                                <label id="exp-distance-force-wrap" class="hidden case-a-cocher">
+                                    <input id="chk-exp-distance" type="checkbox">
+                                    <span>Appliquer l'augmentation de distance (art. 643 et 644 CPC)</span>
+                                </label>
+                            </div>
+                        </details>
+                    </div>
+
+                    <div id="express-result-card" class="carte p-6 flex flex-col">
+                        <div id="express-vide" class="etat-vide">
+                            <i data-lucide="calendar-clock" class="w-8 h-8"></i>
+                            <p>Indiquez la date de l'acte : l'échéance s'affiche ici.</p>
+                        </div>
+                        <div id="express-result-text" class="hidden flex-1"></div>
+                        <div id="express-actions" class="hidden barre-actions">
+                            <button id="btn-copy-express" type="button" class="btn btn-secondaire"><i data-lucide="copy" class="w-4 h-4"></i> Copier</button>
+                            <button id="btn-express-dossier" type="button" class="btn btn-secondaire"><i data-lucide="folder-plus" class="w-4 h-4"></i> Ajouter au dossier</button>
+                            <button id="btn-export-cpc-ics" type="button" class="btn btn-secondaire"><i data-lucide="calendar-plus" class="w-4 h-4"></i> Agenda</button>
+                            <button id="btn-export-cpc-word" type="button" class="btn btn-secondaire"><i data-lucide="file-down" class="w-4 h-4"></i> Word</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- MODE À REBOURS : jalons internes avant une audience -->
+                <section id="section-cpc-retro" class="grille-outil hidden">
+                    <div class="carte p-6 space-y-5">
+                        <div>
+                            <label class="champ-titre" for="retro-date-audience">Date de l'audience ou de la clôture</label>
+                            <input id="retro-date-audience" type="date" class="champ">
+                        </div>
+                        <div>
+                            <label class="champ-titre" for="retro-type-instance">Procédure</label>
+                            <select id="retro-type-instance" class="champ">
+                                <option value="TJ_ORDINAIRE">Tribunal judiciaire</option>
+                                <option value="COUR_APPEL">Cour d'appel</option>
+                                <option value="REFERE">Référé</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="retro-result-card" class="carte p-6 flex flex-col">
+                        <div id="retro-vide" class="etat-vide">
+                            <i data-lucide="calendar-range" class="w-8 h-8"></i>
+                            <p>Indiquez la date de l'audience : le planning de préparation s'affiche ici.</p>
+                        </div>
+                        <div id="retro-steps-container" class="hidden flex-1 frise-verticale"></div>
+                        <p id="retro-note" class="hidden note-discrete">Marges internes de préparation, distinctes des délais légaux. Une date tombant un jour non ouvrable est avancée.</p>
+                        <div id="retro-actions" class="hidden barre-actions">
+                            <button id="btn-export-retro-ics" type="button" class="btn btn-secondaire"><i data-lucide="calendar-plus" class="w-4 h-4"></i> Agenda</button>
+                            <button id="btn-export-retro-word" type="button" class="btn btn-secondaire"><i data-lucide="file-down" class="w-4 h-4"></i> Word</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- =============================================================== -->
+        <!-- 3. SIMULATEUR DE PRESCRIPTION & FORCLUSION                      -->
+        <!-- =============================================================== -->
+        <div id="view-prescription" class="content-view hidden flex-1 overflow-y-auto">
+            <div class="page">
+                <header class="page-entete">
+                    <h1 class="titre-page">Prescription & forclusion</h1>
+                    <button id="btn-reset-prescription" type="button" class="btn btn-fantome"><i data-lucide="rotate-ccw" class="w-4 h-4"></i> Recommencer</button>
+                </header>
+
+                <section class="grille-outil">
+                    <div class="carte p-6 space-y-5">
+                        <div>
+                            <label class="champ-titre" for="sim-regime">Quelle action ?</label>
+                            <select id="sim-regime" class="champ"></select>
+                        </div>
+                        <div>
+                            <label class="champ-titre" for="sim-date-depart">Depuis quand le délai court-il ?</label>
+                            <input id="sim-date-depart" type="date" class="champ">
+                        </div>
+                        <div>
+                            <span class="champ-titre">Interruptions et suspensions</span>
+                            <div id="events-timeline-list" class="space-y-2"></div>
+                            <div class="relative mt-2">
+                                <button id="btn-add-event" type="button" class="btn btn-fantome -ml-2"><i data-lucide="plus" class="w-4 h-4"></i> Ajouter un événement</button>
+                                <div id="menu-evenements" class="hidden menu-flottant">
+                                    <button type="button" data-evenement="DEMANDE_JUSTICE"><strong>Demande en justice</strong><span>Interrompt le délai jusqu'à l'extinction de l'instance</span></button>
+                                    <button type="button" data-evenement="REFERE_EXPERTISE"><strong>Référé-expertise</strong><span>Interruption, puis suspension jusqu'au rapport</span></button>
+                                    <button type="button" data-evenement="MEDIATION"><strong>Médiation ou conciliation</strong><span>Suspend le délai pendant la tentative</span></button>
+                                </div>
+                            </div>
+                        </div>
+                        <details class="options-avancees">
+                            <summary>Options avancées</summary>
+                            <div class="space-y-4 pt-3">
+                                <div>
+                                    <span class="champ-titre">Nature du délai</span>
+                                    <div class="segments">
+                                        <button type="button" class="segment actif" data-qualification="PRESCRIPTION">Prescription</button>
+                                        <button type="button" class="segment" data-qualification="FORCLUSION">Forclusion</button>
+                                    </div>
+                                    <input id="sim-qualification" type="hidden" value="PRESCRIPTION">
+                                </div>
+                                <div>
+                                    <label class="champ-titre" for="sim-date-naissance">Naissance du droit (délai butoir de 20 ans)</label>
+                                    <input id="sim-date-naissance" type="date" class="champ">
+                                </div>
+                                <div>
+                                    <label class="champ-titre" for="sim-date-cible">Situation appréciée au</label>
+                                    <input id="sim-date-cible" type="date" class="champ">
+                                </div>
+                            </div>
+                        </details>
+                    </div>
+
+                    <div class="carte p-6 flex flex-col">
+                        <div id="presc-vide" class="etat-vide">
+                            <i data-lucide="hourglass" class="w-8 h-8"></i>
+                            <p>Choisissez l'action et son point de départ : le résultat s'affiche ici.</p>
+                        </div>
+                        <div id="presc-resultat" class="hidden flex-1 space-y-5">
+                            <div>
+                                <p id="verdict-badge" class="etiquette-statut"></p>
+                                <p id="presc-date" class="date-majeure"></p>
+                                <p id="presc-reste" class="texte-2 text-sm mt-1"></p>
+                            </div>
+                            <div>
+                                <div class="frise-barre">
+                                    <div id="bar-initial" class="bg-sky-500" title="Délai écoulé avant le premier événement"></div>
+                                    <div id="bar-suspended" class="bg-amber-400" title="Période interrompue ou suspendue"></div>
+                                    <div id="bar-remaining" class="bg-emerald-500" title="Délai restant"></div>
+                                </div>
+                                <div class="flex justify-between text-xs texte-3 mt-1.5">
+                                    <span id="timeline-lbl-start"></span>
+                                    <span id="timeline-lbl-susp" class="text-amber-700">Interruption / suspension</span>
+                                    <span id="timeline-lbl-end"></span>
+                                </div>
+                            </div>
+                            <p id="presc-fondement" class="text-sm texte-2"></p>
+                            <ul id="presc-vigilance" class="hidden note-alerte"></ul>
+                            <details class="options-avancees">
+                                <summary>Raisonnement détaillé</summary>
+                                <div id="syllogisme-output" translate="no" class="raisonnement select-text"></div>
+                            </details>
+                        </div>
+                        <div id="presc-actions" class="hidden barre-actions">
+                            <button id="btn-copy-syllogisme" type="button" class="btn btn-secondaire"><i data-lucide="copy" class="w-4 h-4"></i> Copier</button>
+                            <button id="btn-save-presc-to-case" type="button" class="btn btn-secondaire"><i data-lucide="folder-plus" class="w-4 h-4"></i> Ajouter au dossier</button>
+                            <button id="btn-export-presc-ics" type="button" class="btn btn-secondaire"><i data-lucide="calendar-plus" class="w-4 h-4"></i> Agenda</button>
+                            <button id="btn-export-presc-word" type="button" class="btn btn-secondaire"><i data-lucide="file-down" class="w-4 h-4"></i> Word</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- =============================================================== -->
+        <!-- 4. STRATÉGIE DE DÉFENSE & NULLITÉS (SANS SCHÉMA)                -->
+        <!-- =============================================================== -->
+        <div id="view-incidents" class="content-view hidden flex-1 overflow-y-auto">
+            <div class="page">
+                <header class="page-entete">
+                    <h1 class="titre-page">Rédacteur d'actes</h1>
+                    <span class="text-sm texte-2">Dispositif de conclusions en défense</span>
+                </header>
+                <section class="grille-outil">
+                    <div class="carte p-6">
+                        <h2 class="titre-section mb-4">Irrégularités de l'acte adverse</h2>
+                        <div id="incident-checkboxes-grid" class="space-y-2">
+                            <label class="option-cochable">
+                                <input type="checkbox" data-incident="INCOMPETENCE">
+                                <span><strong>Incompétence de la juridiction</strong><span>Exception de procédure · <button type="button" class="btn-legal-article lien-article" data-code="CPC" data-article="75">art. 75 CPC</button></span></span>
+                            </label>
+                            <label class="option-cochable">
+                                <input type="checkbox" data-incident="VICE_FORME">
+                                <span><strong>Mention obligatoire omise</strong><span>Nullité de forme, sur grief · <button type="button" class="btn-legal-article lien-article" data-code="CPC" data-article="114">art. 114 CPC</button></span></span>
+                            </label>
+                            <label class="option-cochable">
+                                <input type="checkbox" data-incident="VICE_FOND">
+                                <span><strong>Défaut de capacité ou de pouvoir</strong><span>Nullité de fond, sans grief · <button type="button" class="btn-legal-article lien-article" data-code="CPC" data-article="117">art. 117 CPC</button></span></span>
+                            </label>
+                            <label class="option-cochable">
+                                <input type="checkbox" data-incident="FNR_PRESCRIPTION">
+                                <span><strong>Prescription, forclusion ou défaut d'intérêt</strong><span>Fin de non-recevoir · <button type="button" class="btn-legal-article lien-article" data-code="CPC" data-article="122">art. 122 CPC</button></span></span>
+                            </label>
+                        </div>
+                        <div class="mt-5 pt-5" style="border-top:1px solid var(--bord)">
+                            <label class="option-cochable option-discrete">
+                                <input id="chk-timing-conclu-fond" type="checkbox">
+                                <span><strong>Conclusions au fond déjà notifiées</strong><span>Les exceptions de procédure sont alors irrecevables · <button type="button" class="btn-legal-article lien-article" data-code="CPC" data-article="74">art. 74 CPC</button></span></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="carte p-6 flex flex-col">
+                        <h2 class="titre-section mb-4">Projet de dispositif</h2>
+                        <ul id="dispositif-alertes" class="hidden note-alerte mb-4"></ul>
+                        <div id="dispositif-output" translate="no" class="raisonnement select-text" style="margin-top:0;background:var(--carte)"></div>
+                        <div class="barre-actions">
+                            <button id="btn-copy-dispositif" type="button" class="btn btn-secondaire"><i data-lucide="copy" class="w-4 h-4"></i> Copier</button>
+                            <button id="btn-export-dispositif-word" type="button" class="btn btn-secondaire"><i data-lucide="file-down" class="w-4 h-4"></i> Word</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- =============================================================== -->
+        <!-- 5. COMPÉTENCE JURIDICTIONNELLE (DIRECTE, SANS SCHÉMA)           -->
+        <!-- =============================================================== -->
+        <div id="view-competence" class="content-view hidden flex-1 overflow-y-auto">
+            <div class="page">
+                <header class="page-entete">
+                    <h1 class="titre-page">Juridiction compétente</h1>
+                    <button id="btn-competence-prefill" type="button" class="btn btn-fantome"><i data-lucide="folder-input" class="w-4 h-4"></i> Reprendre le dossier ouvert</button>
+                </header>
+                <section class="grille-outil">
+                    <div class="carte p-6 space-y-5">
+                        <div>
+                            <label class="champ-titre" for="tree-nat">Matière du litige</label>
+                            <select id="tree-nat" class="champ"></select>
+                        </div>
+                        <div>
+                            <label class="champ-titre" for="tree-montant">Montant de la demande</label>
+                            <label class="champ-unite"><input id="tree-montant" type="number" min="0" placeholder="Principal" class="champ"><span>€</span></label>
+                        </div>
+                        <div>
+                            <label class="champ-titre" for="tree-regle-ter">Rattachement territorial</label>
+                            <select id="tree-regle-ter" class="champ">
+                                <option value="DEFENDEUR">Domicile du défendeur</option>
+                                <option value="LIVRAISON">Contrat : lieu de livraison ou d'exécution</option>
+                                <option value="DOMMAGE">Délit : lieu du fait dommageable ou du dommage</option>
+                                <option value="IMMEUBLE">Immeuble : lieu de situation</option>
+                                <option value="SUCCESSION">Succession : lieu d'ouverture</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="champ-titre" for="tree-ville">Ville</label>
+                            <input id="tree-ville" type="text" placeholder="Ex : Nanterre" class="champ">
+                        </div>
+                    </div>
+                    <div class="carte p-6 flex flex-col">
+                        <div id="tree-verdict-details" class="flex-1"></div>
+                        <div class="barre-actions">
+                            <button id="btn-apply-competence-active-case" type="button" class="btn btn-secondaire"><i data-lucide="folder-check" class="w-4 h-4"></i> Appliquer au dossier</button>
+                            <button id="btn-copy-competence" type="button" class="btn btn-secondaire"><i data-lucide="copy" class="w-4 h-4"></i> Copier</button>
+                            <button id="btn-export-competence-word" type="button" class="btn btn-secondaire"><i data-lucide="file-down" class="w-4 h-4"></i> Word</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- =============================================================== -->
+        <!-- 6. PARAMÈTRES (AVEC CONNEXION LÉGIFRANCE API PISTE & SAUVEGARDE) -->
+        <!-- =============================================================== -->
+        <div id="view-params" class="content-view hidden flex-1 overflow-y-auto">
+            <div class="page" style="max-width:60rem">
+                <header class="page-entete entete-collante">
+                    <h1 class="titre-page">Paramètres</h1>
+                    <button id="btn-save-settings" type="button" class="btn btn-primaire"><i data-lucide="check" class="w-4 h-4"></i> Enregistrer</button>
+                </header>
+
+                <section class="carte reglage">
+                    <div class="reglage-tete"><h2>Langue</h2><p>Langue de l'interface et des textes produits. Le droit applicable reste le droit français.</p></div>
+                    <div class="reglage-corps">
+                        <div class="segments" id="choix-langue">
+                            <button type="button" class="segment" data-langue="en">English</button>
+                            <button type="button" class="segment" data-langue="fr">Français</button>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="carte reglage">
+                    <div class="reglage-tete"><h2>Cabinet</h2><p>Nom affiché sur les exports et seuils d'alerte des échéances.</p></div>
+                    <div class="reglage-corps">
+                        <div>
+                            <label class="champ-titre" for="param-nom-cabinet">Nom du cabinet</label>
+                            <input id="param-nom-cabinet" type="text" placeholder="Ex : Cabinet X & Associés" class="champ">
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="champ-titre" for="param-seuil-rouge">Échéance critique</label>
+                                <label class="champ-unite"><input id="param-seuil-rouge" type="number" min="0" class="champ"><span>jours</span></label>
+                            </div>
+                            <div>
+                                <label class="champ-titre" for="param-seuil-orange">Échéance proche</label>
+                                <label class="champ-unite"><input id="param-seuil-orange" type="number" min="1" class="champ"><span>jours</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="carte reglage">
+                    <div class="reglage-tete"><h2>Jours fériés</h2><p>Siège retenu par défaut pour les calculs. Chaque dossier peut avoir le sien.</p></div>
+                    <div class="reglage-corps">
+                        <div>
+                            <label class="champ-titre" for="param-calendrier-defaut">Siège par défaut des juridictions</label>
+                            <select id="param-calendrier-defaut" class="champ"></select>
+                        </div>
+                        <div><button id="btn-recalc-global" type="button" class="btn btn-secondaire"><i data-lucide="refresh-cw" class="w-4 h-4"></i> Recalculer les échéances en cours</button></div>
+                    </div>
+                </section>
+
+                <section class="carte reglage">
+                    <div class="reglage-tete"><h2>Textes de loi</h2><p>Lecture des articles en vigueur via OpenLegi (service tiers fondé sur Légifrance). Sans configuration, la base locale vérifiée est utilisée.</p></div>
+                    <div class="reglage-corps">
+                        <div>
+                            <label class="champ-titre" for="param-openlegi-url">Adresse du serveur OpenLegi</label>
+                            <input id="param-openlegi-url" type="text" spellcheck="false" placeholder="https://..." class="champ font-mono">
+                        </div>
+                        <div>
+                            <label class="champ-titre" for="param-openlegi-jeton">Jeton d'accès <span class="texte-3 font-normal">(si fourni séparément)</span></label>
+                            <input id="param-openlegi-jeton" type="password" placeholder="Laisser vide si le jeton figure dans l'adresse" class="champ font-mono">
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <button id="btn-test-openlegi" type="button" class="btn btn-secondaire"><i data-lucide="plug-zap" class="w-4 h-4"></i> Tester la connexion</button>
+                            <span id="openlegi-test-status" class="text-xs font-bold"></span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="carte reglage">
+                    <div class="reglage-tete"><h2>Copilote IA</h2><p>Fournisseur, clé et modèle. Les données du dossier sont anonymisées sur ce poste avant envoi.</p></div>
+                    <div class="reglage-corps">
+                        <div class="segments" id="choix-fournisseur-ia">
+                            <button type="button" class="segment" data-fournisseur="GEMINI">Gemini (Google)</button>
+                            <button type="button" class="segment" data-fournisseur="CLAUDE">Claude (Anthropic)</button>
+                        </div>
+                        <input id="param-ia-fournisseur" type="hidden" value="GEMINI">
+                        <div id="ia-bloc-gemini" class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="champ-titre" for="param-gemini-key">Clé API Gemini</label>
+                                <input id="param-gemini-key" type="password" placeholder="AIzaSy..." class="champ font-mono">
+                            </div>
+                            <div>
+                                <label class="champ-titre" for="param-gemini-model">Modèle</label>
+                                <input id="param-gemini-model" type="text" list="gemini-models-list" placeholder="gemini-2.5-flash" class="champ font-mono">
+                                <datalist id="gemini-models-list">
+                                    <option value="gemini-2.5-flash"></option>
+                                    <option value="gemini-2.5-pro"></option>
+                                    <option value="gemini-2.5-flash-lite"></option>
+                                </datalist>
+                            </div>
+                        </div>
+                        <div id="ia-bloc-claude" class="hidden grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="champ-titre" for="param-claude-key">Clé API Claude</label>
+                                <input id="param-claude-key" type="password" placeholder="sk-ant-..." class="champ font-mono">
+                            </div>
+                            <div>
+                                <label class="champ-titre" for="param-claude-model">Modèle</label>
+                                <input id="param-claude-model" type="text" list="claude-models-list" placeholder="claude-opus-5-5" class="champ font-mono">
+                                <datalist id="claude-models-list">
+                                    <option value="claude-opus-5-5">Claude Opus 5.5 - le plus précis</option>
+                                    <option value="claude-sonnet-5-5">Claude Sonnet 5.5 - plus rapide, moins cher</option>
+                                    <option value="claude-haiku-5-5">Claude Haiku 5.5 - très rapide, économique</option>
+                                </datalist>
+                            </div>
+                        </div>
+                        <label class="case-a-cocher">
+                            <input id="param-gemini-anonymize" type="checkbox" checked>
+                            <span>Anonymiser avant envoi (parties, n° RG, termes confidentiels, e-mails, téléphones, IBAN)</span>
+                        </label>
+                        <div class="flex items-center gap-3">
+                            <button id="btn-test-ia" type="button" class="btn btn-secondaire"><i data-lucide="zap" class="w-4 h-4"></i> Tester la connexion</button>
+                            <span id="ia-test-status" class="text-xs font-bold"></span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="carte reglage">
+                    <div class="reglage-tete"><h2>Alertes e-mail</h2><p>Envoi par Resend. L'expéditeur doit appartenir à un domaine vérifié dans Resend. Un seul récapitulatif regroupe les échéances qui franchissent un seuil.</p></div>
+                    <div class="reglage-corps">
+                        <div>
+                            <label class="champ-titre" for="param-resend-key">Clé API Resend</label>
+                            <input id="param-resend-key" type="password" placeholder="re_..." class="champ font-mono">
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="champ-titre" for="param-resend-from">Expéditeur</label>
+                                <input id="param-resend-from" type="text" placeholder="Deadline Breaker <alertes@votre-domaine.fr>" class="champ">
+                            </div>
+                            <div>
+                                <label class="champ-titre" for="param-resend-emails">Destinataires</label>
+                                <input id="param-resend-emails" type="text" placeholder="avocat@cabinet.fr, assistante@cabinet.fr" class="champ">
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <button id="btn-test-email" type="button" class="btn btn-secondaire"><i data-lucide="send" class="w-4 h-4"></i> Envoyer un e-mail de test</button>
+                            <span id="email-test-status" class="text-xs font-bold"></span>
+                        </div>
+                        <div class="pt-4 space-y-4" style="border-top:1px solid var(--bord)">
+                            <label class="case-a-cocher"><input id="param-alertes-auto" type="checkbox" checked> <span>Envoyer automatiquement un récapitulatif des échéances qui approchent</span></label>
+                            <div class="grid grid-cols-2 gap-4 items-end">
+                                <div>
+                                    <label class="champ-titre" for="param-alertes-jours">Prévenir</label>
+                                    <label class="champ-unite"><input id="param-alertes-jours" type="text" placeholder="7, 2" class="champ"><span>jours avant</span></label>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <button id="btn-verifier-alertes" type="button" class="btn btn-secondaire"><i data-lucide="bell-ring" class="w-4 h-4"></i> Vérifier maintenant</button>
+                                </div>
+                            </div>
+                            <span id="alertes-status" class="text-xs font-bold"></span>
+                            <label class="case-a-cocher"><input id="param-demarrage-windows" type="checkbox"> <span>Lancer Deadline Breaker à l'ouverture de session Windows (fenêtre réduite), pour que les alertes partent même si l'application n'est pas ouverte</span></label>
+                            <span id="demarrage-status" class="text-xs font-bold"></span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="carte reglage">
+                    <div class="reglage-tete"><h2>Sauvegarde</h2><p>Données conservées sur ce poste. Une copie de secours est tenue à chaque écriture ; les clés API ne figurent jamais dans les sauvegardes.</p></div>
+                    <div class="reglage-corps">
+                        <div id="storage-info" translate="no" class="chemins select-text"></div>
+                        <div class="flex flex-wrap items-center gap-2">
+                            <button id="btn-export-backup-json" type="button" class="btn btn-secondaire"><i data-lucide="download" class="w-4 h-4"></i> Créer une sauvegarde</button>
+                            <label class="btn btn-secondaire cursor-pointer">
+                                <i data-lucide="upload" class="w-4 h-4"></i> Restaurer une sauvegarde
+                                <input id="input-import-backup-json" type="file" accept=".json,application/json" class="hidden">
+                            </label>
+                        </div>
+                        <label class="case-a-cocher"><input id="chk-import-keep-params" type="checkbox" checked> <span>Lors d'une restauration, conserver mes paramètres et clés actuels</span></label>
+                        <div class="pt-4" style="border-top:1px solid var(--bord)">
+                            <button id="btn-reset-base" type="button" class="btn btn-danger"><i data-lucide="rotate-ccw" class="w-4 h-4"></i> Réinitialiser la base</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- =============================================================== -->
+        <!-- 6 bis. AGENDA DES ÉCHÉANCES (TOUS DOSSIERS)                      -->
+        <!-- =============================================================== -->
+        <div id="view-agenda" class="content-view hidden flex-1 overflow-y-auto">
+            <div class="page page-large">
+                <header class="page-entete">
+                    <div class="flex items-center gap-3">
+                        <h1 id="agenda-titre-mois" class="titre-page capitalize">Agenda</h1>
+                        <div class="flex items-center gap-1">
+                            <button id="btn-agenda-prec" type="button" class="btn-icone" title="Mois précédent"><i data-lucide="chevron-left" class="w-4 h-4"></i></button>
+                            <button id="btn-agenda-suiv" type="button" class="btn-icone" title="Mois suivant"><i data-lucide="chevron-right" class="w-4 h-4"></i></button>
+                        </div>
+                        <button id="btn-agenda-aujourdhui" type="button" class="btn btn-secondaire">Aujourd'hui</button>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="segments">
+                            <button id="btn-agenda-mois" type="button" class="segment actif">Mois</button>
+                            <button id="btn-agenda-liste" type="button" class="segment">Liste</button>
+                        </div>
+                        <details class="menu-reglages">
+                            <summary class="btn-icone" title="Affichage"><i data-lucide="sliders-horizontal" class="w-4 h-4"></i></summary>
+                            <div class="menu-flottant droite p-3 space-y-2 w-56">
+                                <label class="case-a-cocher"><input id="agenda-afficher-accomplies" type="checkbox"> <span>Échéances accomplies</span></label>
+                                <label class="case-a-cocher"><input id="agenda-afficher-archives" type="checkbox"> <span>Dossiers archivés</span></label>
+                            </div>
+                        </details>
+                        <button id="btn-export-agenda-ics" type="button" class="btn btn-secondaire"><i data-lucide="calendar-plus" class="w-4 h-4"></i> Exporter</button>
+                    </div>
+                </header>
+
+                <section id="agenda-vue-mois" class="agenda-mois">
+                    <div class="carte overflow-hidden">
+                        <div class="agenda-jours-semaine"><span>Lun.</span><span>Mar.</span><span>Mer.</span><span>Jeu.</span><span>Ven.</span><span>Sam.</span><span>Dim.</span></div>
+                        <div id="agenda-grille" class="agenda-grille"></div>
+                    </div>
+                    <aside id="agenda-detail-jour" class="carte p-5 self-start"></aside>
+                </section>
+                <div id="agenda-list" class="hidden space-y-4"></div>
+            </div>
+        </div>
+
+        <!-- =============================================================== -->
+        <!-- 7. JOURNAL D'AUDIT (TRAÇABILITÉ RCP)                            -->
+        <!-- =============================================================== -->
+        <div id="view-journal" class="content-view hidden flex-1 overflow-y-auto">
+            <div class="page page-large">
+                <header class="page-entete">
+                    <h1 class="titre-page">Journal d'activité</h1>
+                    <div class="flex items-center gap-2">
+                        <label class="champ-recherche" style="width:16rem">
+                            <i data-lucide="search" class="w-4 h-4"></i>
+                            <input id="journal-filter-text" type="text" placeholder="Rechercher" class="champ">
+                        </label>
+                        <select id="journal-filter-cat" class="champ champ-compact">
+                            <option value="">Toutes les catégories</option>
+                            <option value="DOSSIER">Dossiers</option>
+                            <option value="DELAI_CPC">Échéances</option>
+                            <option value="CALCUL">Calculs</option>
+                            <option value="DILIGENCE">Diligences</option>
+                            <option value="ALERTE">Alertes</option>
+                            <option value="IA">Copilote IA</option>
+                            <option value="LEGIFRANCE">Légifrance</option>
+                            <option value="SYSTEME">Système</option>
+                        </select>
+                        <button id="btn-export-journal" type="button" class="btn btn-fantome" title="Exporter en texte brut (.txt)">Texte</button>
+                        <button id="btn-export-journal-pdf" type="button" class="btn btn-secondaire"><i data-lucide="file-text" class="w-4 h-4"></i> Exporter en PDF</button>
+                    </div>
+                </header>
+                <div id="journal-list" class="carte overflow-hidden"></div>
+            </div>
+        </div>
+
+        <!-- =============================================================== -->
+        <!-- 8. ANALYSE DES PIÈCES ADVERSES (PDF ou texte, IA)               -->
+        <!-- =============================================================== -->
+        <div id="view-analyse" class="content-view hidden flex-1 overflow-y-auto">
+            <div class="page page-large">
+                <header class="page-entete">
+                    <h1 class="titre-page">Pièces adverses</h1>
+                    <button id="btn-cas-test" type="button" class="btn btn-secondaire" title="Charger le cas pratique de démonstration (fonctionne sans connexion)"><i data-lucide="flask-conical" class="w-4 h-4 text-purple-500"></i> Cas test</button>
+                </header>
+                <section class="grille-outil">
+                    <div class="carte p-6 space-y-5">
+                        <label id="zone-depot" class="zone-depot" for="input-piece">
+                            <i data-lucide="file-up" class="w-7 h-7"></i>
+                            <span class="font-medium texte-1">Déposez une assignation ou des conclusions</span>
+                            <span class="text-xs texte-3">PDF ou fichier texte · ou cliquez pour choisir</span>
+                            <input id="input-piece" type="file" accept=".pdf,.txt,application/pdf,text/plain" class="hidden">
+                        </label>
+                        <div id="piece-chargee" class="hidden piece-chargee">
+                            <i data-lucide="file-text" class="w-5 h-5 text-sky-600 shrink-0"></i>
+                            <span class="min-w-0 flex-1">
+                                <span id="piece-nom" translate="no" class="block text-sm font-medium texte-1 truncate"></span>
+                                <span id="piece-infos" class="block text-xs texte-3"></span>
+                            </span>
+                            <button id="btn-retirer-piece" type="button" class="btn-icone" style="width:1.9rem;height:1.9rem" title="Retirer la pièce"><i data-lucide="x" class="w-4 h-4"></i></button>
+                        </div>
+                        <div>
+                            <label class="champ-titre" for="adverse-act-raw-text">Texte de la pièce</label>
+                            <textarea id="adverse-act-raw-text" rows="12" placeholder="Le texte extrait du PDF s'affiche ici. Vous pouvez aussi le coller directement." class="champ text-sm"></textarea>
+                        </div>
+                        <div>
+                            <label class="champ-titre" for="analyse-dossier">Dossier concerné</label>
+                            <select id="analyse-dossier" class="champ"></select>
+                        </div>
+                        <div class="flex items-center justify-between gap-3">
+                            <span class="text-xs texte-3 flex items-center gap-1.5"><i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-600"></i> <span id="analyse-anonymisation">Texte anonymisé sur ce poste avant envoi à l'IA</span></span>
+                            <button id="btn-extract-adverse-analysis" type="button" class="btn btn-primaire"><i data-lucide="sparkles" class="w-4 h-4"></i> Analyser</button>
+                        </div>
+                    </div>
+
+                    <div class="carte p-6 flex flex-col">
+                        <div id="analyse-vide" class="etat-vide">
+                            <i data-lucide="file-search" class="w-8 h-8"></i>
+                            <p>Déposez une pièce adverse puis lancez l'analyse : dates, demandes, fondements et irrégularités de procédure s'affichent ici.</p>
+                        </div>
+                        <div id="adverse-analysis-results" class="hidden flex-1 space-y-6">
+                            <div>
+                                <p class="text-xs font-medium texte-3">Synthèse</p>
+                                <p id="analyse-resume" class="text-sm texte-1 mt-1 leading-relaxed"></p>
+                            </div>
+                            <div class="bloc-irregularites">
+                                <h3><i data-lucide="shield-alert" class="w-4 h-4"></i> Irrégularités et moyens de défense</h3>
+                                <div id="adverse-flaws-container" class="space-y-2"></div>
+                            </div>
+                            <div>
+                                <h3 class="titre-section mb-2">Dates et délais</h3>
+                                <div id="adverse-dates-container" class="space-y-1.5"></div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-6">
+                                <div>
+                                    <h3 class="titre-section mb-2">Demandes</h3>
+                                    <div id="adverse-claims-container" class="space-y-1 text-sm texte-2"></div>
+                                </div>
+                                <div>
+                                    <h3 class="titre-section mb-2">Fondements invoqués</h3>
+                                    <div id="adverse-grounds-container" class="space-y-1 text-sm texte-2"></div>
+                                </div>
+                            </div>
+                            <p id="analyse-meta" class="note-discrete"></p>
+                        </div>
+                        <div id="analyse-actions" class="hidden barre-actions">
+                            <button id="btn-copy-analyse" type="button" class="btn btn-secondaire"><i data-lucide="copy" class="w-4 h-4"></i> Copier</button>
+                            <button id="btn-word-analyse" type="button" class="btn btn-secondaire"><i data-lucide="file-down" class="w-4 h-4"></i> Word</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- =============================================================== -->
+    <!-- 7. COPILOTE IA (GEMINI OU CLAUDE) + ANALYSEUR D'ACTE ADVERSE      -->
+    <!-- =============================================================== -->
+    <button id="ai-collapsed-tab" type="button" title="Ouvrir le copilote IA" class="poignee-ia">
+        <i data-lucide="chevrons-left" class="w-4 h-4 fleche"></i>
+        <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-400"></i>
+        <span class="writing-vertical">Copilote IA</span>
+    </button>
+
+    <aside id="ai-global-dock" class="fixed right-0 top-0 h-full w-[440px] bg-white border-l border-slate-200 shadow-2xl z-50 flex flex-col transform translate-x-full transition-all duration-300">
+        <!-- En-tête du copilote -->
+        <div class="h-14 px-4 border-b border-slate-200 bg-white flex items-center justify-between shrink-0">
+            <div class="flex items-center gap-2.5 min-w-0">
+                <div class="w-7 h-7 rounded-lg bg-indigo-600 text-white flex items-center justify-center shrink-0"><i data-lucide="bot" class="w-4 h-4"></i></div>
+                <div class="min-w-0">
+                    <h3 class="font-semibold text-sm text-slate-900 leading-tight">Copilote IA</h3>
+                    <p id="chat-model-label" class="text-[11px] text-slate-500 truncate"></p>
+                </div>
+            </div>
+            <div class="flex items-center gap-1">
+                <button id="btn-toggle-ai-width" title="Élargir le panneau" class="p-1.5 text-slate-500 hover:text-slate-900 rounded-md hover:bg-slate-100 transition"><i data-lucide="maximize-2" class="w-4 h-4"></i></button>
+                <button id="btn-clear-chat" title="Effacer la discussion" class="p-1.5 text-slate-500 hover:text-slate-900 rounded-md hover:bg-slate-100 transition"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+            </div>
+        </div>
+
+        <!-- Contexte actif -->
+        <div class="px-3 py-1.5 bg-indigo-50/80 border-b border-indigo-100 flex items-center justify-between text-[11px]">
+            <span class="flex items-center gap-1.5 text-indigo-950 font-medium truncate">
+                <i data-lucide="folder-check" class="w-3.5 h-3.5 text-indigo-600 shrink-0"></i>
+                <span id="chat-active-context-label" class="font-semibold truncate">Dossier actif</span>
+            </span>
+            <span class="flex items-center gap-1 shrink-0">
+                <span id="chat-anon-label" class="text-[9px] font-semibold px-1.5 py-0.5 rounded border"></span>
+                <span id="chat-tool-context-label" class="text-[9px] font-mono bg-white px-1.5 py-0.5 rounded text-indigo-700 border border-indigo-200">Affaires</span>
+            </span>
+        </div>
+
+        <!-- SOUS-ONGLET 1 : DISCUSSION -->
+        <div id="ai-subview-chat" class="flex-1 flex flex-col overflow-hidden">
+            <div class="p-2 border-b border-slate-100 bg-white grid grid-cols-3 gap-1 text-[11px]">
+                <button class="btn-quick-prompt text-left p-1.5 rounded-md border border-slate-200 hover:border-indigo-300 hover:bg-indigo-50/40 text-slate-700 font-medium transition truncate" data-prompt="Audite strictement les risques procéduraux : détecte tous les risques d'irrecevabilité, de caducité (Art. 908/909 CPC), de prescription ou de forclusion applicables.">
+                    <i data-lucide="shield-alert" class="w-3.5 h-3.5 inline -mt-0.5 text-indigo-500"></i> Auditer les risques
+                </button>
+                <button class="btn-quick-prompt text-left p-1.5 rounded-md border border-slate-200 hover:border-indigo-300 hover:bg-indigo-50/40 text-slate-700 font-medium transition truncate" data-prompt="Rédige un projet d'e-mail clair, rigoureux et rassurant à destination de notre client pour lui faire un point d'étape sur la procédure en cours, les délais impartis et les prochaines étapes.">
+                    <i data-lucide="mail" class="w-3.5 h-3.5 inline -mt-0.5 text-indigo-500"></i> E-mail au client
+                </button>
+                <button class="btn-quick-prompt text-left p-1.5 rounded-md border border-slate-200 hover:border-indigo-300 hover:bg-indigo-50/40 text-slate-700 font-medium transition truncate" data-prompt="Rédige la trame ordonnancée du dispositif de nos conclusions d'avocat, en respectant la règle in limine litis (Art. 74 CPC), les fins de non-recevoir (Art. 122 CPC) et les prétentions au fond.">
+                    <i data-lucide="scale" class="w-3.5 h-3.5 inline -mt-0.5 text-indigo-500"></i> Trame de conclusions
+                </button>
+            </div>
+
+            <div id="chat-messages-container" translate="no" class="flex-1 overflow-y-auto p-3 space-y-3 text-xs bg-slate-50/40"></div>
+
+            <div class="p-2.5 bg-white border-t border-slate-200 shrink-0">
+                <form id="chat-input-form" class="flex gap-2">
+                    <textarea id="chat-user-input" rows="2" placeholder="Posez une question procédurale ou demandez un projet d'acte..." class="flex-1 p-2 bg-slate-50 border border-slate-200 rounded-lg text-xs outline-none focus:ring-1 focus:ring-indigo-500 resize-none font-medium text-slate-800"></textarea>
+                    <button type="submit" class="px-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg flex items-center justify-center transition shadow-xs">
+                        <i data-lucide="send-horizontal" class="w-4 h-4"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- SOUS-ONGLET 2 : ANALYSER UN ACTE ADVERSE -->
+    </aside>
+
+    <!-- =============================================================== -->
+    <!-- 8. MODALE DE LECTURE OFFICIELLE LÉGIFRANCE (API PISTE)          -->
+    <!-- =============================================================== -->
+    <div id="modal-legifrance" class="fixed inset-0 bg-slate-950/60 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-2xl w-full max-w-2xl overflow-hidden flex flex-col max-h-[85vh]">
+            <!-- Header Modale Légifrance -->
+            <div class="px-5 py-3.5 border-b border-slate-200 flex items-center justify-between bg-slate-50">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded-lg bg-sky-600 text-white flex items-center justify-center shadow-xs">
+                        <i data-lucide="landmark" class="w-4 h-4"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h3 id="modal-legi-title" class="font-bold text-sm text-slate-900">Article ...</h3>
+                            <span id="modal-legi-source-badge" class="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-sky-100 text-sky-800">Légifrance</span>
+                        </div>
+                        <p id="modal-legi-code" class="text-[11px] text-slate-500 font-medium">Code de procédure civile</p>
+                    </div>
+                </div>
+                <button id="btn-close-modal-legifrance" class="text-slate-400 hover:text-slate-600 p-1 rounded-lg">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <!-- Corps : Texte officiel en vigueur -->
+            <div class="p-5 overflow-y-auto space-y-3 text-xs leading-relaxed">
+                <div class="flex items-center justify-between pb-2 border-b border-slate-100 text-slate-500 text-[11px]">
+                    <span id="modal-legi-date-vigueur" class="flex items-center gap-1 font-medium">
+                        <i data-lucide="check-circle" class="w-3.5 h-3.5 text-emerald-600"></i> Version en vigueur
+                    </span>
+                    <span id="modal-legi-id" class="font-mono text-slate-400 text-[10px]"></span>
+                </div>
+                
+                <div id="modal-legi-text" translate="no" class="p-4 bg-slate-50/70 border border-slate-200/80 rounded-xl font-serif text-slate-800 text-[13px] leading-relaxed whitespace-pre-line select-text">
+                    Chargement du texte officiel...
+                </div>
+                <p id="modal-legi-url" translate="no" class="text-[10px] font-mono text-slate-500 select-text break-all"></p>
+            </div>
+
+            <!-- Footer Modale avec bouton injection Copilote IA -->
+            <div class="px-5 py-3 border-t border-slate-200 bg-slate-50 flex items-center justify-between gap-2">
+                <button id="btn-refresh-legi" class="px-3 py-1.5 border border-slate-300 hover:bg-slate-100 text-slate-700 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition">
+                    <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> Actualiser
+                </button>
+                <button id="btn-open-legifrance" class="px-3 py-1.5 bg-sky-600 hover:bg-sky-700 text-white rounded-lg text-xs font-bold flex items-center gap-1.5 transition">
+                    <i data-lucide="external-link" class="w-3.5 h-3.5"></i> Ouvrir sur Légifrance
+                </button>
+                <button id="btn-copy-legi-text" class="px-3 py-1.5 border border-slate-300 hover:bg-slate-100 text-slate-700 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition">
+                    <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copier le texte officiel
+                </button>
+                <div class="flex items-center gap-2">
+                    <button id="btn-insert-legi-to-ai" class="px-3.5 py-1.5 bg-gradient-to-r from-sky-600 to-indigo-600 hover:from-sky-700 hover:to-indigo-700 text-white rounded-lg text-xs font-bold shadow-xs flex items-center gap-1.5 transition">
+                        <i data-lucide="bot" class="w-3.5 h-3.5 text-amber-300"></i> Insérer la citation dans le Copilote IA
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODALE NOUVELLE AFFAIRE -->
+    <div id="modal-new-case" class="fixed inset-0 bg-slate-950/60 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-2xl w-full max-w-lg overflow-hidden flex flex-col">
+            <div class="px-5 py-3.5 border-b border-slate-200 flex items-center justify-between bg-slate-50">
+                <h3 class="font-semibold text-sm text-slate-900 flex items-center gap-2">
+                    <i data-lucide="folder-plus" class="w-4 h-4 text-sky-600"></i> <span id="modal-case-title">Nouvelle affaire</span>
+                </h3>
+                <button id="btn-close-modal-new-case" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-4 h-4"></i></button>
+            </div>
+            <div class="p-5 space-y-4 text-sm modale-corps">
+                <div>
+                    <label class="champ-titre">Nom du dossier / Parties *</label>
+                    <input id="modal-case-nom" type="text" placeholder="Ex: SAS ALPHA c/ M. DUPONT" class="champ">
+                </div>
+                <div class="grid grid-cols-2 gap-2.5">
+                    <div>
+                        <label class="champ-titre">Référence cabinet</label>
+                        <input id="modal-case-ref" type="text" placeholder="Ex: DOS-2026-X1" class="champ">
+                    </div>
+                    <div>
+                        <label class="champ-titre">N° de RG</label>
+                        <input id="modal-case-rg" type="text" placeholder="Ex: RG 26/04419" class="champ">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-2.5">
+                    <div>
+                        <label class="champ-titre">Juridiction</label>
+                        <input id="modal-case-juridiction" type="text" placeholder="Ex: TJ de Nanterre" class="champ">
+                    </div>
+                    <div>
+                        <label class="champ-titre">Enjeu financier (€)</label>
+                        <input id="modal-case-enjeu" type="number" min="0" step="0.01" placeholder="0" class="champ">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-2.5">
+                    <div>
+                        <label class="champ-titre">Client</label>
+                        <input id="modal-case-client" type="text" placeholder="Partie représentée" class="champ">
+                    </div>
+                    <div>
+                        <label class="champ-titre">Partie adverse</label>
+                        <input id="modal-case-adverse" type="text" placeholder="Partie adverse" class="champ">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-2.5">
+                    <div>
+                        <label class="champ-titre">Résidence de la partie (art. 643 / 644)</label>
+                        <select id="modal-case-residence" class="champ">
+                            <option value="FRANCE_METROPOLE">France métropolitaine</option>
+                            <option value="DOM_TOM">Outre-mer, autre collectivité que la juridiction</option>
+                            <option value="DOM_TOM_LOCAL">Outre-mer, même collectivité que la juridiction</option>
+                            <option value="ETRANGER">Étranger</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="champ-titre">Statut</label>
+                        <select id="modal-case-statut" class="champ">
+                            <option value="ACTIVE">Actif</option>
+                            <option value="ARCHIVEE">Archivé</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="champ-titre">Termes confidentiels à masquer pour l'IA (séparés par des virgules)</label>
+                    <input id="modal-case-termes" type="text" placeholder="Ex : nom du gérant, adresse du bien, nom d'un témoin" class="champ">
+                </div>
+                <div>
+                    <label class="champ-titre">Siège de la juridiction (jours fériés, art. 644)</label>
+                    <select id="modal-case-calendrier" class="champ"></select>
+                </div>
+                <div>
+                    <label class="champ-titre">Notes</label>
+                    <textarea id="modal-case-notes" rows="2" class="champ"></textarea>
+                </div>
+            </div>
+            <div class="px-5 py-3 border-t border-slate-200 bg-slate-50 flex justify-end gap-2">
+                <button id="btn-cancel-modal-new-case" class="btn btn-secondaire">Annuler</button>
+                <button id="btn-submit-modal-new-case" class="btn btn-primaire">Créer le dossier</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODALE AJOUTER UN ACTE -->
+    <div id="modal-add-act" class="fixed inset-0 bg-slate-950/60 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-2xl w-full max-w-md overflow-hidden flex flex-col">
+            <div class="px-5 py-3.5 border-b border-slate-200 flex items-center justify-between bg-slate-50">
+                <h3 class="font-semibold text-sm text-slate-900 flex items-center gap-2">
+                    <i data-lucide="calendar-plus" class="w-4 h-4 text-sky-600"></i> Ajouter une échéance
+                </h3>
+                <button id="btn-close-modal-add-act" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-4 h-4"></i></button>
+            </div>
+            <div class="p-5 space-y-4 text-sm modale-corps">
+                <div>
+                    <label class="champ-titre">Nature de l'acte / événement</label>
+                    <input id="modal-act-nature" type="text" placeholder="Ex: Notification des conclusions d'appelant" class="champ">
+                </div>
+                <div>
+                    <label class="champ-titre">Délai procédural applicable</label>
+                    <select id="modal-act-delai" class="champ"></select>
+                </div>
+                <div>
+                    <label id="modal-act-date-label" class="champ-titre">Date de l'acte / notification (origine du délai)</label>
+                    <input id="modal-act-date" type="date" class="champ">
+                </div>
+                <div id="modal-act-manual-wrap" class="hidden">
+                    <label class="champ-titre">Date de l'échéance fixée</label>
+                    <input id="modal-act-date-manuelle" type="date" class="champ">
+                </div>
+                <div id="modal-act-libre-wrap" class="hidden space-y-2 p-2.5 bg-amber-50/60 border border-amber-200 rounded-lg">
+                    <div class="grid grid-cols-3 gap-2">
+                        <div><label class="champ-titre">Années</label><input id="modal-act-libre-annees" type="number" min="0" value="0" class="champ"></div>
+                        <div><label class="champ-titre">Mois</label><input id="modal-act-libre-mois" type="number" min="0" value="0" class="champ"></div>
+                        <div><label class="champ-titre">Jours</label><input id="modal-act-libre-jours" type="number" min="0" value="0" class="champ"></div>
+                    </div>
+                    <input id="modal-act-libre-fondement" type="text" placeholder="Fondement (ex : art. R. 121-21 CPCE)" class="champ">
+                    <input id="modal-act-libre-sanction" type="text" placeholder="Sanction encourue" class="champ">
+                    <label class="flex items-center gap-2 text-slate-700"><input id="modal-act-libre-distance" type="checkbox" class="rounded"> Appliquer l'augmentation de distance (art. 643 / 644)</label>
+                </div>
+                <div id="modal-act-preview" class="p-2 rounded-lg border border-sky-200 bg-sky-50 text-[11px] text-sky-950 leading-relaxed hidden"></div>
+            </div>
+            <div class="px-5 py-3 border-t border-slate-200 bg-slate-50 flex justify-end gap-2">
+                <button id="btn-cancel-modal-add-act" class="btn btn-secondaire">Annuler</button>
+                <button id="btn-submit-modal-add-act" class="btn btn-primaire">Enregistrer l'échéance</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PALETTE DE COMMANDE CTRL + F -->
+    <div id="palette-modal" class="fixed inset-0 bg-slate-950/60 backdrop-blur-xs z-50 hidden items-start justify-center pt-24 p-4">
+        <div class="bg-white rounded-xl border border-slate-200 shadow-2xl w-full max-w-lg overflow-hidden flex flex-col">
+            <div class="p-3 border-b border-slate-200 flex items-center gap-2 bg-slate-50">
+                <i data-lucide="search" class="w-4 h-4 text-slate-400"></i>
+                <input id="palette-search-input" type="text" placeholder="Rechercher une affaire, un acte, un délai..." class="w-full bg-transparent text-xs outline-none text-slate-800 placeholder-slate-400 font-medium">
+                <kbd class="text-[10px] bg-slate-200 px-1.5 py-0.5 rounded text-slate-600 font-mono">ESC</kbd>
+            </div>
+            <div id="palette-items-list" class="max-h-72 overflow-y-auto p-1.5 space-y-1 text-xs"></div>
+        </div>
+    </div>
+
+    <!-- MODALE DE CONFIRMATION -->
+    <div id="modal-confirm" class="fixed inset-0 bg-slate-950/60 z-[60] hidden items-center justify-center p-4">
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-2xl w-full max-w-md overflow-hidden flex flex-col">
+            <div class="px-5 py-3.5 border-b border-slate-200 bg-slate-50">
+                <h3 id="modal-confirm-title" class="font-bold text-xs text-slate-900">Confirmation</h3>
+            </div>
+            <div id="modal-confirm-message" class="p-4 text-xs text-slate-700 leading-relaxed whitespace-pre-line"></div>
+            <div class="px-5 py-3 border-t border-slate-200 bg-slate-50 flex justify-end gap-2">
+                <button id="btn-confirm-cancel" class="btn btn-secondaire">Annuler</button>
+                <button id="btn-confirm-ok" class="btn btn-primaire">Confirmer</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast-zone" class="fixed bottom-4 left-1/2 -translate-x-1/2 z-[70] flex flex-col items-center gap-2 pointer-events-none"></div>
+
+    <script src="i18n-en.js"></script>
+    <script src="renderer.js"></script>
+</body>
+</html>
